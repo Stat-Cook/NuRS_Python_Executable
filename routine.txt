@@ -1,3 +1,0 @@
-execfile("src/main.py", {})
-execfile("src/main.py", {})
-execfile("src/main.py", {})
