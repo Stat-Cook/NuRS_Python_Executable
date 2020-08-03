@@ -1,2 +1,4 @@
+import pandas as pd
+
 print("Hello World!")
-input()
+print(pd.__version__)
