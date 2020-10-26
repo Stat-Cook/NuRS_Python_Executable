@@ -31,9 +31,37 @@ def shuffle(frm, size_check, name=None, *args):
             assert n > 1, "Not enough data to shuffle."
         else:
             assert n > 1, "Not enough data for {} to shuffle".format(name)
-    return frm.apply(lambda x: np.random.choice(x, frm.shape[0]))
+    return frm.apply(lambda x: np.random.choice(x, frm.shape[0],  replace=False))
+
+
+# progress_string = lambda x, n: "".join(["\r|", x*"X", (n-x)*".", "|"])
+
+# import sys
+from .progress_bar import ProgressBar
+def progress_bar_iter(grps, func, size_check, bar_size=20):
+    # size = len(grps.groups)
+    # k = 1
+
+    progress = ProgressBar(20, len(grps.groups))
+
+    print("Shuffle in progress:")
+    for i,j in grps:
+        progress.step()
+        # progress = k / size * bar_size
+        # k = k + 1
+        # sys.stdout.write(progress_string(int(progress), bar_size))
+        yield func(j, size_check, i)
+
 
 
 def split_apply(frm, groupby, func, size_check=False):
     grps = frm.groupby(groupby)
-    return pd.concat([func(j, size_check, i) for i,j in grps])
+    size = len(grps.groups)
+#    return pd.concat([func(j, size_check, i) for i,j in grps])
+    return pd.concat(progress_bar_iter(grps, func, size_check))
+
+
+def to_file(data, path, file_name):
+    to_file = os.path.join(path, file_name)
+    data.to_csv(to_file, index=False)
+    print("Data written to  {}".format(to_file))
