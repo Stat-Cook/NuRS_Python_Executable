@@ -1,11 +1,15 @@
 import pandas as pd
 import numpy as np
+import logging
 
 from utilities import *
 from config import EXTRACT_PATH
 
+FILE_NAME = "ESR_Leavers"
+
 if __name__ == '__main__':
 
+    define_logger(EXTRACT_PATH, FILE_NAME)
     check_file_names("ESR_Leavers")
 
     leavers_path = find_file("Trust_data", "ESR_Leavers")

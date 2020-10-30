@@ -3,8 +3,11 @@ from utilities import *
 from config import EXTRACT_PATH
 
 
+FILE_NAME = "Allocate_Assignment_Combined"
+
 if __name__ == '__main__':
 
+    define_logger(EXTRACT_PATH, FILE_NAME)
     check_file_names("Allocate_Assignment")
 
     path = os.path.join("Trust_data", "Allocate_Assignment")

@@ -10,9 +10,11 @@ def extract_date_function(file):
     m = pattern.search(file)
     return pd.to_datetime(m.group()[1:-1], yearfirst=True)
 
+FILE_NAME = "ESR_Demographics"
 
 if __name__ == '__main__':
 
+    define_logger(EXTRACT_PATH, FILE_NAME)
     check_file_names("ESR_Demographics")
 
     path = os.path.join("Trust_data", "ESR_Demographics")
