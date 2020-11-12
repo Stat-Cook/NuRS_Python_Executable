@@ -42,6 +42,22 @@ class Combiner:
         """
         return os.listdir(self.path)
 
+    @property
+    def path(self):
+        """
+        path property
+        """
+        return self._path
+
+    @path.setter
+    def path(self, path):
+        try:
+            assert os.path.isdir(path)
+        except AssertionError:
+            raise FileNotFoundError("No directory {} found".format(path))
+        self._path = path
+
+
     def iterate_through_path(self, extract_date_function):
         """
         For each data set at 'path':
@@ -100,7 +116,7 @@ class Combiner:
 
             if not file_type:
                 logging.info("Combine failed - Incorrect file type for %s", file)
-                raise Exception(
+                raise TypeError(
                     "Incorrect file type found (not xlsx, xls, or csv) for file {}.  "
                     "Please remove from folder {}".format(file, self.path)
                 )

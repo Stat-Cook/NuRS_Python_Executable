@@ -12,7 +12,6 @@ from .file_structure import START, END, name_dispatch, file_options
 
 
 class FileNameChecker:
-
     """
     Check if file names and folder structures match the patterns set.
     Parameters
@@ -36,11 +35,14 @@ class FileNameChecker:
         A count of how often each file name is used.
     """
 
-    def __init__(self, name, style, window, path, start=START, end=END):
+    def __init__(self,
+                 name, style, window, path,
+                 start=START, end=END, prepend_path="Trust_data"
+                 ):
         self.name = name
         self.style = style
         self.window = window
-        self.path = os.path.join("Trust_data", path)
+        self.path = os.path.join(prepend_path, path)
         self.start = start
         self.end = end
         self.cnts = Counter(self.actual)
@@ -71,7 +73,7 @@ class FileNameChecker:
         """List files at 'path' that have duplicated names (excluding file type)."""
         return [i for i, j in self.cnts.items() if j > 1]
 
-    def _report(self, data, report_type):
+    def _report(self, data, report_type, raise_exception=False):
         """
         Utility template for other reports:
         Parameters
@@ -86,32 +88,61 @@ class FileNameChecker:
             logging.info("% file summary:", report_type)
             for file in data:
                 logging.info("\tFile '%s' %s at '%s'", file, report_type, self.path)
+            if raise_exception:
+                raise raise_exception(data)
 
-    def report_missing(self):
+    def report_missing(self, raise_exception=False):
         """
         Report which files were missing
+        Parameters
+        ----------
+        raise_exception: bool
+            On error - raise an exception.  If false details are logged to file.
         """
+        if raise_exception:
+            raise_exception = lambda data: FileNotFoundError(
+                "Files are missing:\n\t{}".format("\n\t".join(data))
+            )
         self._report(
             self.missing_files,
-            "Missing"
+            "Missing",
+            raise_exception
         )
 
-    def report_extra(self):
+    def report_extra(self, raise_exception=False):
         """
         Report which files were unnecessary.
+        Parameters
+        ----------
+        raise_exception: bool
+            On error - raise an exception.  If false details are logged to file.
         """
+        if raise_exception:
+            raise_exception = lambda data: Exception(
+                "Files are unexpected:\n\t{}".format("\n\t".join(data))
+            )
         self._report(
             self.extra_files,
-            "Unexpected"
+            "Unexpected",
+            raise_exception
         )
 
-    def report_duplicates(self):
+    def report_duplicates(self, raise_exception=False):
         """
         Report which files were duplicates.
+        Parameters
+        ----------
+        raise_exception: bool
+            On error - raise an exception.  If false details are logged to file.
         """
+        if raise_exception:
+            raise_exception = lambda data: Exception(
+                "Files are duplicated:\n\t{}".format("\n\t".join(data))
+            )
         self._report(
             self.duplicate_files,
             "Duplicated",
+            raise_exception
         )
 
     def run_report(self):

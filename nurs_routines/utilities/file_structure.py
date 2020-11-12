@@ -37,7 +37,7 @@ def time_series_names(name, *args):
     -------
     str
     """
-    return name
+    return [name]
 
 
 def monthly_names(name, start=START, end=END):
@@ -104,7 +104,7 @@ def name_dispatch(name, style, window, start=START, end=END):
     iterable[str]
     """
     functions = {
-        "Full": monthly_names,
+        "Full": time_series_names,
         "Monthly": monthly_names,
         "Quarterly": quarterly_names
     }

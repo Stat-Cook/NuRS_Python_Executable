@@ -9,6 +9,9 @@ FILE_NAME = "Allocate_Accuity_Combined"
 
 if __name__ == '__main__':
 
+    log = "Allocate_Accuity"
+    file_names = "Allocate_Accuity"
+
     define_logger(EXTRACT_PATH, FILE_NAME)
     check_file_names("Allocate_Accuity")
 
