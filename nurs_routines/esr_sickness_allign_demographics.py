@@ -1,6 +1,8 @@
 import os
 import time
-from utilities import MergeAsOf, find_file, split_apply, shuffle, to_file, remove_pid, scramble, GetMonth
+import pandas as pd
+
+from utilities import *
 from config import EXTRACT_PATH
 
 
@@ -27,11 +29,14 @@ if __name__ == '__main__':
     demographic_columns = [i for i in merger.reference.columns if i in merged_data.columns]
 
     # Replace demographic columns with scrambled demographic columns.
-    # Scrambling done at "Owning Unit", "Duty Date" aggregate
-    # i.e. ward and day.
+    # Scrambling done at "Owning Unit", Month aggregate
 
     month_shuffler = GetMonth()
-    merged_data = month_shuffler.shuffle_and_join(merged_data, demographic_columns)
+    # grps = merged_data.grouped_monthly_shuffle("Organisation")
+    # _iter = (month_shuffler.shuffle_and_join(df, demographic_columns) for _, df in grps)
+    # merged_data = month_shuffler.shuffle_and_join(merged_data, demographic_columns)
+    # merged_data = pd.concat(_iter)
+    merged_data = month_shuffler.grouped_monthly_shuffle(merged_data, "Organisation", demographic_columns)
 
     print("\nShuffling completed")
 #     print("Shuffling data time: {:0f}s".format(time.time() - t0))

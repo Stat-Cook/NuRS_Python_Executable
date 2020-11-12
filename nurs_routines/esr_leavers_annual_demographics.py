@@ -11,7 +11,5 @@ if __name__ == '__main__':
 
     data = remove_pid(leavers)
 
-
     result = split_apply(data, ["Organisation", "Termination Year"], shuffle)
-
     to_file(result, EXTRACT_PATH, "Leavers_Annual_Demographics.csv")
