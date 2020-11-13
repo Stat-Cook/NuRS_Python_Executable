@@ -1,1 +1,8 @@
 /NuRS_executable/
+/notebooks/
+
+!/Trust_data/.gitignore
+/Trust_data/
+
+!/Extract_data/.gitignore
+/Extract_data/
