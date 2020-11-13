@@ -9,7 +9,7 @@ This repository contains the implementations for:
 
 of data sets extracted inside NHS Trusts.
 
-To the reader - the core python implementation is in the `nurs_routine` folder.  Each python script inside is a single standalone routine to produce a data set, using the tools implemeted in the `utilities` sub-directory.
+To the reader - the core python implementation is in the [nurs_routine](nurs_routines) folder.  Each python script inside is a single standalone routine to produce a data set, using the tools implemeted in the [utilities](nurs_routines/utilities) sub-directory.
 
 ## Shuffling algorithm:
 
