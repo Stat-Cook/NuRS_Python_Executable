@@ -20,3 +20,7 @@ The implementation can be found [here](nurs_routines/utilities/utilities.py).
 ## Local level shuffle:
 
 The shuffling algorithm is applied to data while it is clustered by features, e.g. ward and shift.  This is done via a call to a scramble function - either `scramble` or `scramble_to_file` as implemented [here](nurs_routines/utilities/scrambler.py).  This function in turn calls a handler function that divides the data into chunks and then applies `shuffle` - the functions for dividing the data are `split_apply` and `cached_split_apply` as implemented [here](nurs_routines/utilities/split_apply.py).  The difference between the two implementations being the choice to concatenate the chunks of shuffled data together either via appending to a temporary file or as a call to pandas.concat at the end.
+
+## Data Structure:
+
+It is recommended that Trusts take a copy of this repository - either via a git clone or by downloading it.  As the trust generate data sets they can be placed in the Trust_data folder.  Once the data is in place, running the scripts will create new data sets in the Extract_data folder for upload to the research team.
