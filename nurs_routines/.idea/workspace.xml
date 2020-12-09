@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7b214609-225b-421d-b8ca-b4081e1b4832" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/test_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../install_venv.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../install_venv.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/io.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../routine.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1jYXUnJYmoiHAlT2A6OEL7aXzBX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b214609-225b-421d-b8ca-b4081e1b4832" name="Default Changelist" comment="" />
+      <created>1603982016821</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603982016821</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="174" y="30" key="#Inspections" timestamp="1603986038616">
+      <screen x="0" y="0" width="1440" height="770" />
+    </state>
+    <state x="174" y="30" key="#Inspections/0.0.1440.770@0.0.1440.770" timestamp="1603986038616" />
+    <state x="82" y="13" width="812" height="745" key="#Intentions" timestamp="1604058211510">
+      <screen x="0" y="0" width="1440" height="770" />
+    </state>
+    <state x="82" y="13" width="812" height="745" key="#Intentions/0.0.1440.770@0.0.1440.770" timestamp="1604058211510" />
+    <state x="468" y="241" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1604069664814">
+      <screen x="0" y="0" width="1440" height="770" />
+    </state>
+    <state x="468" y="241" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.770@0.0.1440.770" timestamp="1604069664814" />
+    <state x="222" y="27" key="SettingsEditor" timestamp="1604058344045">
+      <screen x="0" y="0" width="1440" height="770" />
+    </state>
+    <state x="222" y="27" key="SettingsEditor/0.0.1440.770@0.0.1440.770" timestamp="1604058344045" />
+    <state x="463" y="28" key="refactoring.ChangeSignatureDialog" timestamp="1604063466830">
+      <screen x="0" y="0" width="1440" height="770" />
+    </state>
+    <state x="463" y="28" key="refactoring.ChangeSignatureDialog/0.0.1440.770@0.0.1440.770" timestamp="1604063466830" />
+    <state x="384" y="93" width="672" height="678" key="search.everywhere.popup" timestamp="1604069794851">
+      <screen x="0" y="0" width="1440" height="770" />
+    </state>
+    <state x="384" y="93" width="672" height="678" key="search.everywhere.popup/0.0.1440.770@0.0.1440.770" timestamp="1604069794851" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utilities/merge_asof.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
