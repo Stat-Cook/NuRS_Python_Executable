@@ -23,3 +23,8 @@ class PIDResults(defaultdict):
     def context_to_screen(self):
         for context in self.context_factory:
             print(context)
+
+    def context_to_file(self, filename):
+        with open(filename, "w") as f:
+            for context in self.context_factory:
+                f.write(context)

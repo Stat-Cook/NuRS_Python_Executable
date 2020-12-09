@@ -38,3 +38,9 @@ class PIDReporter:
 
         self.melt_data(data)
         return self.check_data()
+
+    def report_data_set_to_file(self, data, filename):
+        results = self.check_data_set(data)
+        results.context_to_screen()
+        results.context_to_file(filename)
+        return results
