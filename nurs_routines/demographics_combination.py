@@ -6,9 +6,17 @@ from utilities import *
 
 
 def extract_date_function(file):
-    pattern = re.compile(r" .*\.")
+    pattern = re.compile(r"(\d+)")
     m = pattern.search(file)
-    return pd.to_datetime(m.group()[1:-1], yearfirst=True)
+    if m:
+        date = pd.to_datetime(m.group(), yearfirst=True)
+        if (date.year < 2025) and (date.year > 2000):
+            return date
+        else:
+            return pd.to_datetime(m.group(), yearfirst=False)
+
+    raise AttributeError("Date string not found in file name")
+
 
 FILE_NAME = "ESR_Demographics"
 
