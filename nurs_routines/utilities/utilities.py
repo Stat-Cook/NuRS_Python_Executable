@@ -2,6 +2,7 @@
 General utility functions.
 New implementations are inserted here during development phase.
 """
+import os
 import logging
 import numpy as np
 import pandas as pd
@@ -31,3 +32,13 @@ def shuffle(frm, size_check, name=None):
             logging.warning("Not enough data to shuffle %s", name)
             return pd.DataFrame([width * [None]], columns=frm.columns)
     return frm.apply(lambda x: np.random.choice(x, frm.shape[0], replace=False))
+
+
+trust_data_path_join = lambda x: os.path.join("Trust_data", x)
+
+
+def main_routine(instance):
+    result = instance.main()
+    if isinstance(result, pd.DataFrame):
+        return result.reset_index(drop=True)
+    return result
