@@ -20,7 +20,11 @@ class PIDReporter:
 
         compiled_pattern = PIDPattern(pattern)
         sel = self.melted[self.melted["value"].apply(str).apply(compiled_pattern.match).apply(bool)]
-        pid_location = np.transpose([sel.index, sel["variable"], sel["value"]])
+        pid_location = np.transpose([
+            sel.index,
+            sel["variable"].values,
+            sel["value"].values
+        ])
         return pid_location
 
     def check_data(self):
