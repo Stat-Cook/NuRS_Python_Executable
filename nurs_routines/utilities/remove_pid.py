@@ -24,7 +24,7 @@ def remove_pid(data, extra_remove=None):
         'NI Number', 'Assignment Number', 'Employee Number', 'Staff Number',
         'Personal Email Address', 'Email Address',
         'Address Line 1', 'Address Line 2', 'Address Line 3',
-        'Town or City', 'County', 'Postal Code',
+        'Town or City', 'County', 'Postal Code', "Census Entered By"
     ]
 
     extra_remove = extra_remove or []

@@ -12,3 +12,4 @@ from .scrambler import scramble, scramble_to_file
 from .month_tools import GetMonth
 from .define_logger import define_logger
 from .split_apply import split_apply, cached_split_apply
+from .script_factories import ScriptFactory

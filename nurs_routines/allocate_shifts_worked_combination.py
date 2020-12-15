@@ -4,25 +4,21 @@ Allocate Shift Work data sets will sit in Trust_data/Allocate_Shifts_Worked.
 The script finds all files in this directory and combines before exporting.
 """
 
-import os
-from utilities import *
-
+from utilities import check_file_names, ScriptFactory
 from config import EXTRACT_PATH
 
-FILE_NAME = "Allocate_Shifts_Worked_Combined"
 
 if __name__ == '__main__':
 
-    define_logger(EXTRACT_PATH, FILE_NAME)
     check_file_names("Allocate_Shifts_Worked")
-
+    # PID purposefully not removed for later allignment.
     tasks = {
-        "Join file names": None,
-        "Combine data": None,
-        "Main routine": None,
-        "Reset index": None,
-        "Remove PID": None,
-        "To file": [("Trust_data", "Temporary_Files"), "Allocate_Shifts_Worked_Combined.csv"]
+        "Join file names": dict(file="Allocate_Shifts_Worked"),
+        "Combine datasets": {},
+        "Reset index": {},
+        "To file": dict(
+            extract_path=("Trust_data", "Temporary_Files"),
+            file_name="Allocate_Shifts_Worked_Combined")
     }
-    routine = ScriptFactory(EXTRACT_PATH, FILE_NAME, tasks)
-    routine.process_script("Allocate_Shifts_Worked")
+    routine = ScriptFactory(EXTRACT_PATH, "Allocate_Shifts_Worked_Combined", tasks)
+    routine.process_script()

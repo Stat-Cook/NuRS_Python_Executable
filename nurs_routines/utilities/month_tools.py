@@ -80,10 +80,9 @@ class GetMonth:
         monthly_data = self.yield_data(data, start_column, end_column)
         for start_of_month, month in monthly_data:
             month[columns_to_shuffle] = shuffle(
-                month[columns_to_shuffle],
-                True,
-                start_of_month,
-                True
+                frm=month[columns_to_shuffle],
+                size_check=True,
+                name=start_of_month
             )
 
             yield month
