@@ -5,7 +5,7 @@ Steps:
 2. Iterate through files opening and combining
 3. Reindex the data frame
 4. Remove any PID.
-5. Save to file
+5. Save to file Allocate_Assignment_Combined.csv
 """
 from .utilities import ScriptFactory, check_file_names
 from .config import EXTRACT_PATH

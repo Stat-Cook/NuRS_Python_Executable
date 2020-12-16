@@ -1,5 +1,11 @@
 """
-
+Combine ESR Mandatory Training data sets into a single file.
+Steps:
+1. Find files in Trust_data/ESR_Mandatory_Training
+2. Iterate through files opening and combining
+3. Reindex the data frame
+4. Remove any PID.
+5. Save to file ESR_Mandatory_Training.csv
 """
 from .utilities import ScriptFactory, check_file_names
 from .config import EXTRACT_PATH

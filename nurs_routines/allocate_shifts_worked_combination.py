@@ -1,9 +1,13 @@
 """
-Script to combine Allocate Shift Worked quarterly data sets into one file for export.
-Allocate Shift Work data sets will sit in Trust_data/Allocate_Shifts_Worked.
-The script finds all files in this directory and combines before exporting.
+Combine Allocate Shifts Worked data sets into a single file.
+NB: This data set contains PID to allow alignment at later stages.
+Hence - this data set should not be removed from Trusts.
+Steps:
+1. Find files in Trust_data/Allocate_Shifts_Worked
+2. Iterate through files opening and combining
+3. Reindex the data frame
+4. Save to Temporary_Files Allocate_Shifts_Worked_Combined.csv
 """
-
 from .utilities import check_file_names, ScriptFactory
 from .config import EXTRACT_PATH
 

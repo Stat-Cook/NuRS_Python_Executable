@@ -1,14 +1,15 @@
-import os
-
+"""
+Add ESR Demographics data to ESR Sickness data sets into a single file.
+Steps:
+1. Find file ESR_Sickness.csv
+2. Find file ESR_Demographics_Combined.csv
+3. Merge the files by Employee number looking backwards in date.
+4. Scramble the data at Ward level
+5. Remove any PID.
+6. Save to file ESR_Sickness_Demographics_Combined.csv
+"""
 from .utilities import *
 from .config import EXTRACT_PATH
-
-
-def check_file_exists(*path):
-    file_path = os.path.join(*path)
-    if not os.path.isfile(file_path):
-        raise FileNotFoundError("File {} not found".format(path[-1]))
-    return 0
 
 
 if __name__ == '__main__':

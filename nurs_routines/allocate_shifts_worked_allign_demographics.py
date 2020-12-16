@@ -1,16 +1,19 @@
+"""
+Add ESR Demographics data to Allocate Shift Worked data sets into a single file.
+Steps:
+1. Find file Allocate_Shifts_Worked_Combined.csv
+2. Find file ESR_Demographics_Combined.csv
+3. Merge the files by Employee number looking backwards in date.
+4. Scramble the data at Ward-Date-Shift level
+5. Remove any PID.
+6. Save to file Allocate_Shifts_Worked_Demographics_Combined.csv
+"""
 import os
 
 from .utilities import ScriptFactory
 from .config import EXTRACT_PATH
 
 
-def check_file_exists(*path):
-    file_path = os.path.join(*path)
-    if not os.path.isfile(file_path):
-        raise FileNotFoundError("File {} not found".format(path[-1]))
-    return 0
-
-#TODO: filter out null keys from ESR_Demographics.
 if __name__ == '__main__':
 
     tasks = {

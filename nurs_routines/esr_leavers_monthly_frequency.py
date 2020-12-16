@@ -1,3 +1,12 @@
+"""
+Combine ESR Leavers data sets into a single file.
+Steps:
+1. Find files in Trust_data/ESR_Leavers
+2. Calculate the Termination Year-Month
+3. Group by Year-Month, Ward and Leaving Reason and calculate leavers frequency
+4. Drop all columns except Organisation, Termination Month, Leaving Reason, Frequency.
+5. Save to file Leavers_Monthly_Frequencies.csv
+"""
 import pandas as pd
 import numpy as np
 

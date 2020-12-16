@@ -1,6 +1,14 @@
-
+"""
+Combine Allocate Shifts Worked data sets into a single file.
+NB: This data set contains PID to allow alignment at later stages.
+Hence - this data set should not be removed from Trusts.
+Steps:
+1. Find files in Trust_data/ESR_Demographics
+2. Iterate through files opening and combine - adding date from file name into the frame.
+3. Reindex the data frame
+4. Save to Temporary_Files ESR_Demographics_Combined.csv
+"""
 import re
-import pandas as pd
 
 from .utilities import *
 from .config import EXTRACT_PATH

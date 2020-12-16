@@ -1,3 +1,10 @@
+"""
+Process ESR Sickness data sets to remove PID.
+Steps:
+1. Find files in Trust_data/ESR_Mandatory_Training
+2. Open and remove any PID.
+3. Save to file ESR_Sickness_processed.csv
+"""
 from .utilities import *
 from .config import EXTRACT_PATH
 

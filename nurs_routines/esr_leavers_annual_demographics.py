@@ -1,3 +1,12 @@
+"""
+Combine ESR Leavers data sets into a single file.
+Steps:
+1. Find files in Trust_data/ESR_Leavers
+2. Calculate the Termination Year (TODO: consider financial year not calendar year)
+3. Remove PID
+4. Scramble at Organization-Year level.
+5. Save to file Leavers_Annual_Demographics.csv
+"""
 from .utilities import ScriptFactory, check_file_names
 from .config import EXTRACT_PATH
 
