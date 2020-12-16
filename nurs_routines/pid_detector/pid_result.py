@@ -59,6 +59,6 @@ class PIDResults(defaultdict):
         -------
         None
         """
-        with open(filename, "w") as f:
+        with open(filename, "w") as file:
             for context in self.context_factory:
-                f.write(context)
+                file.write(context)
