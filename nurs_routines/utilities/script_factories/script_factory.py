@@ -1,3 +1,6 @@
+"""
+Tools for applying scripts in a uniform human readable manner.
+"""
 from collections import namedtuple
 
 from .. import define_logger
