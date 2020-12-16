@@ -8,8 +8,6 @@ Steps:
 5. Remove any PID.
 6. Save to file Allocate_Shifts_Worked_Demographics_Combined.csv
 """
-import os
-
 from .utilities import ScriptFactory
 from .config import EXTRACT_PATH
 
