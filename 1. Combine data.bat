@@ -3,7 +3,7 @@
 call NuRS_executable\Scripts\activate
 
 :: Allocate
-call python -m nurs_routines.allocate_accuity_combination
+call python -m nurs_routines.allocate_acuity_combination
 call python -m nurs_routines.allocate_assignment_combination
 
 :: EST
