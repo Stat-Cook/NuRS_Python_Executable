@@ -4,8 +4,8 @@ Allocate Shift Work data sets will sit in Trust_data/Allocate_Shifts_Worked.
 The script finds all files in this directory and combines before exporting.
 """
 
-from utilities import check_file_names, ScriptFactory
-from config import EXTRACT_PATH
+from .utilities import check_file_names, ScriptFactory
+from .config import EXTRACT_PATH
 
 
 if __name__ == '__main__':

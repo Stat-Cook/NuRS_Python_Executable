@@ -1,7 +1,7 @@
 import os
 
-from utilities import *
-from config import EXTRACT_PATH
+from .utilities import *
+from .config import EXTRACT_PATH
 
 
 def check_file_exists(*path):

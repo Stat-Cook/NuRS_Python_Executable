@@ -1,5 +1,14 @@
-from utilities import ScriptFactory, check_file_names
-from config import EXTRACT_PATH
+"""
+Combine Allocate Assignment data sets into a single file.
+Steps:
+1. Find files in Trust_data/Allocate_Assignment
+2. Iterate through files opening and combining
+3. Reindex the data frame
+4. Remove any PID.
+5. Save to file
+"""
+from .utilities import ScriptFactory, check_file_names
+from .config import EXTRACT_PATH
 
 
 if __name__ == '__main__':

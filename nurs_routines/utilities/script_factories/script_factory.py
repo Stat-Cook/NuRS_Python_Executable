@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from utilities import define_logger, to_file
+from .. import define_logger
 from .script_functions import ScriptFunctionFactory
 
 

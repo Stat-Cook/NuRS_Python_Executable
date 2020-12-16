@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-from utilities import check_file_names, ScriptFactory
-from config import EXTRACT_PATH
+from .utilities import check_file_names, ScriptFactory
+from .config import EXTRACT_PATH
 
 FILE_NAME = "ESR_Leavers"
 

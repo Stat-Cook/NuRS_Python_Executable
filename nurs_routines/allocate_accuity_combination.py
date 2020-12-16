@@ -1,12 +1,17 @@
 """
-
+Combine Allocate Accuity data sets into a single file.
+Steps:
+1. Find files in Trust_data/Allocate_Accuity
+2. Iterate through files opening and combining
+3. Reindex the data frame
+4. Remove any PID.
+5. Save to file
 """
-from utilities import check_file_names, ScriptFactory
-from config import EXTRACT_PATH
+from .utilities import check_file_names, ScriptFactory
+from .config import EXTRACT_PATH
 
 
-if __name__ == '__main__':
-
+def main():
     check_file_names("Allocate_Accuity")
 
     tasks = {
@@ -19,3 +24,8 @@ if __name__ == '__main__':
 
     routine = ScriptFactory(EXTRACT_PATH, "Allocate_Accuity_Combined", tasks)
     routine.process_script()
+
+
+if __name__ == '__main__':
+
+    main()

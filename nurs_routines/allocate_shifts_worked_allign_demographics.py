@@ -1,7 +1,7 @@
 import os
 
-from utilities import ScriptFactory, check_file_names
-from config import EXTRACT_PATH
+from .utilities import ScriptFactory
+from .config import EXTRACT_PATH
 
 
 def check_file_exists(*path):

@@ -2,8 +2,8 @@
 import re
 import pandas as pd
 
-from utilities import *
-from config import EXTRACT_PATH
+from .utilities import *
+from .config import EXTRACT_PATH
 
 
 def extract_date_function(file):

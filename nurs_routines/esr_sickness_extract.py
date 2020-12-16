@@ -1,5 +1,5 @@
-from utilities import *
-from config import EXTRACT_PATH
+from .utilities import *
+from .config import EXTRACT_PATH
 
 
 if __name__ == '__main__':
