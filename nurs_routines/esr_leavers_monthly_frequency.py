@@ -17,11 +17,21 @@ FILE_NAME = "ESR_Leavers"
 
 
 def monthly_frequency(data):
-    grps = data.groupby(["Organisation", "Termination Month",  "Leaving Reason"])
+    """
+    Reduce a data set to a frequency table.
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        ESR Leavers data set.
+    Returns
+    -------
+    pandas.DataFrame
+    """
+    grps = data.groupby(["Organisation", "Termination Month", "Leaving Reason"])
     result = pd.DataFrame(
         [np.concatenate((i, j.shape))[:-1] for i, j in grps]
     )
-    result.columns = ["Organisation", "Termination Month",  "Leaving Reason", "Count"]
+    result.columns = ["Organisation", "Termination Month", "Leaving Reason", "Count"]
     return result
 
 
