@@ -1,7 +1,13 @@
+"""
+PID tool for compiling pattern to regex.
+"""
 import re
 
 
 class PIDPattern:
+    """
+    Automated compilation of regex pattern for finding names.
+    """
 
     def __init__(self, string: str):
         assert isinstance(string, str)
@@ -11,11 +17,27 @@ class PIDPattern:
 
     @property
     def to_pattern(self):
-        return ".*({upper}|{lower}){body}".format(
+        """
+        Convert the string to a regex pattern
+        Returns
+        -------
+        regex string
+        """
+        return r".*({upper}|{lower}){body}".format(
             upper=self.start.upper(),
             lower=self.start.lower(),
             body=self.body
         )
 
     def match(self, string):
+        """
+        Check if a given word contains the pattern
+        Parameters
+        ----------
+        string: str
+            Free text to check for match.
+        Returns
+        -------
+        bool
+        """
         return bool(self.compiled.match(string))
