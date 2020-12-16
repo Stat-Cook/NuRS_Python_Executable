@@ -38,6 +38,16 @@ trust_data_path_join = lambda x: os.path.join("Trust_data", x)
 
 
 def main_routine(instance):
+    """
+    Run the .main() method of the object given.
+    Parameters
+    ----------
+    instance: object
+
+    Returns
+    -------
+    Any
+    """
     result = instance.main()
     if isinstance(result, pd.DataFrame):
         return result.reset_index(drop=True)
