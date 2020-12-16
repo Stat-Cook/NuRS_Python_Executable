@@ -39,6 +39,7 @@ class FileNameChecker:
                  name, style, window, path,
                  start=START, end=END, prepend_path="Trust_data"
                  ):
+        # pylint: disable=too-many-arguments
         self.name = name
         self.style = style
         self.window = window

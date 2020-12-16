@@ -16,8 +16,8 @@ file_options = {
                                "window": "Monthly", "path": "ESR_Mandatory_Training"},
     "ESR_Demographics": {"name": "ESR_Demographics", "style": "Effective date",
                          "window": "Monthly", "path": "ESR_Demographics"},
-    "Allocate_Accuity": {"name": "Allocate_Accuity", "style": "Time Series",
-                         "window": "Quarterly", "path": "Allocate_Accuity"},
+    "Allocate_Acuity": {"name": "Allocate_Acuity", "style": "Time Series",
+                        "window": "Quarterly", "path": "Allocate_Acuity"},
     "Allocate_Assignment": {"name": "Allocate_Assignment", "style": "Time Series",
                             "window": "Quarterly", "path": "Allocate_Assignment"},
     "Allocate_Shifts_Worked": {"name": "Allocate_Shifts_Worked", "style": "Time Series",
@@ -37,6 +37,7 @@ def time_series_names(name, *args):
     -------
     str
     """
+    # pylint: disable=unused-argument
     return [name]
 
 
@@ -103,6 +104,7 @@ def name_dispatch(name, style, window, start=START, end=END):
     -------
     iterable[str]
     """
+    # pylint: disable=unused-argument
     functions = {
         "Full": time_series_names,
         "Monthly": monthly_names,

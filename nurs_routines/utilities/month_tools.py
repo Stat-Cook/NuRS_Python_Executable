@@ -80,10 +80,9 @@ class GetMonth:
         monthly_data = self.yield_data(data, start_column, end_column)
         for start_of_month, month in monthly_data:
             month[columns_to_shuffle] = shuffle(
-                month[columns_to_shuffle],
-                True,
-                start_of_month,
-                True
+                frm=month[columns_to_shuffle],
+                size_check=True,
+                name=start_of_month
             )
 
             yield month
@@ -114,7 +113,7 @@ class GetMonth:
 
     def grouped_monthly_shuffle(self,
                                 data, groupby, columns_to_shuffle,
-                                start_column="Absence Start Date", end_column="Absence End Date"
+                                date_columns=None
                                 ):
         """
         Carry out the monthly extract-shuffle with an aggregated DataFrame.
@@ -127,15 +126,13 @@ class GetMonth:
             the column(s) to aggregate on to shuffle
         columns_to_shuffle: str
             the column of 'data' to shuffle
-        start_column: str
-            the column to treat as month start
-        end_column: str
-            the column to treat as month end
-
+        date_columns: tuple(str)
+            the columns to treat as month start and month end
         Returns
         -------
         pandas.DataFrame
         """
+        start_column, end_column = date_columns or ["Absence Start Date", "Absence End Date"]
         grps = data.groupby(groupby)
         _iter = self.progres_bar_iteration(
             grps, columns_to_shuffle,

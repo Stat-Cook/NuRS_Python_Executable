@@ -5,6 +5,12 @@ from nurs_routines.utilities import Combiner
 
 
 def test_combiner(combine):
+    """
+    Test - combiner makes correct shape data
+    Parameters
+    ----------
+    combine: Combiner
+    """
     data = combine.main()
     n, k = data.shape
     assert n == 100
@@ -12,6 +18,9 @@ def test_combiner(combine):
 
 
 def test_init_fails():
+    """
+    Test - assert Combiner fails if data folder doesnt exist.
+    """
     path = os.path.join("nurs_routines", "tests",
                         "test_data", "no_folder")
 
@@ -20,5 +29,11 @@ def test_init_fails():
 
 
 def test_path(combine):
+    """
+    Test - assert combiner finds all files.
+    Parameters
+    ----------
+    combine: Combiner
+    """
     path = combine.path_content
     assert len(path) == 5

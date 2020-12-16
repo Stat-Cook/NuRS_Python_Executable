@@ -1,27 +1,54 @@
+"""
+Combine ESR Leavers data sets into a single file.
+Steps:
+1. Find files in Trust_data/ESR_Leavers
+2. Calculate the Termination Year-Month
+3. Group by Year-Month, Ward and Leaving Reason and calculate leavers frequency
+4. Drop all columns except Organisation, Termination Month, Leaving Reason, Frequency.
+5. Save to file Leavers_Monthly_Frequencies.csv
+"""
 import pandas as pd
 import numpy as np
-import logging
 
-from utilities import *
-from config import EXTRACT_PATH
+from .utilities import check_file_names, ScriptFactory
+from .config import EXTRACT_PATH
 
 FILE_NAME = "ESR_Leavers"
 
-if __name__ == '__main__':
 
-    define_logger(EXTRACT_PATH, FILE_NAME)
-    check_file_names("ESR_Leavers")
-
-    leavers_path = find_file("Trust_data", "ESR_Leavers")
-    leavers = load_data(leavers_path)
-
-    leavers["Termination Month"] = leavers["Termination Date"].apply(lambda x: "{}-{}".format(x.year, x.month))
-    grps = leavers.groupby(["Organisation", "Termination Month",  "Leaving Reason"])
-
+def monthly_frequency(data):
+    """
+    Reduce a data set to a frequency table.
+    Parameters
+    ----------
+    data: pandas.DataFrame
+        ESR Leavers data set.
+    Returns
+    -------
+    pandas.DataFrame
+    """
+    grps = data.groupby(["Organisation", "Termination Month", "Leaving Reason"])
     result = pd.DataFrame(
         [np.concatenate((i, j.shape))[:-1] for i, j in grps]
     )
-    result.columns = ["Organisation", "Termination Month",  "Leaving Reason", "Count"]
+    result.columns = ["Organisation", "Termination Month", "Leaving Reason", "Count"]
+    return result
 
-    to_file(result, EXTRACT_PATH, "Leavers_Monthly_Frequencies.csv")
 
+if __name__ == '__main__':
+
+    check_file_names("ESR_Leavers")
+
+    tasks = {
+        "Load data": dict(path="Trust_data", name="ESR_Leavers"),
+        "Manipulate column": dict(
+            new_column="Termination Month",
+            old_column="Termination Date",
+            function=lambda x: "{}-{}".format(x.year, x.month)
+        ),
+        "Apply function": dict(function=monthly_frequency),
+        "To file": dict(extract_path=EXTRACT_PATH, file_name="Leavers_Monthly_Frequencies")
+    }
+
+    routine = ScriptFactory(EXTRACT_PATH, "ESR_Leavers", tasks)
+    routine.process_script()

@@ -1,22 +1,27 @@
-import os
-from utilities import *
-from config import EXTRACT_PATH
+"""
+Combine Allocate Assignment data sets into a single file.
+Steps:
+1. Find files in Trust_data/Allocate_Assignment
+2. Iterate through files opening and combining
+3. Reindex the data frame
+4. Remove any PID.
+5. Save to file Allocate_Assignment_Combined.csv
+"""
+from .utilities import ScriptFactory, check_file_names
+from .config import EXTRACT_PATH
 
-
-FILE_NAME = "Allocate_Assignment_Combined"
 
 if __name__ == '__main__':
 
-    define_logger(EXTRACT_PATH, FILE_NAME)
     check_file_names("Allocate_Assignment")
 
-    path = os.path.join("Trust_data", "Allocate_Assignment")
+    tasks = {
+        "Join file names": dict(file="Allocate_Assignment"),
+        "Combine datasets": {},
+        "Reset index": {},
+        "Remove PID": {},
+        "To file": dict(extract_path=EXTRACT_PATH, file_name="Allocate_Assignment_Combined")
+    }
 
-    comb = Combiner(path)
-    result = comb.main()
-    result = result.reset_index(drop=True)
-
-    to_file(result, EXTRACT_PATH,  "Allocate_Assignment_Combined.csv")
-    #
-    # to_file = os.path.join(EXTRACT_PATH, "Allocate_Assignment_Combined.csv")
-    # result.to_csv(to_file, index=False)
+    routine = ScriptFactory(EXTRACT_PATH, "Allocate_Assignment_Combined", tasks)
+    routine.process_script()

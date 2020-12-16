@@ -31,7 +31,7 @@ class MergeAsOf:
         True/ False flag to control logging during merge.
         If true log file contains list of all merge keys.
     """
-
+    # pylint:disable=too-many-arguments
     def __init__(self, data, reference, left_group, right_group,
                  earliest_date=datetime(1970, 1, 1), log_merge=False):
         self.data = GroupedFrame(data, left_group)
