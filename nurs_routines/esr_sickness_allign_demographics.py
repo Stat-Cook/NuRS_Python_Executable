@@ -8,12 +8,10 @@ Steps:
 5. Remove any PID.
 6. Save to file ESR_Sickness_Demographics_Combined.csv
 """
-from .utilities import *
+from .utilities import ScriptFactory
 from .config import EXTRACT_PATH
 
-
 if __name__ == '__main__':
-
 
     tasks = {
         "Find files": dict(path="Trust_data", name="ESR_Sickness"),
@@ -21,7 +19,7 @@ if __name__ == '__main__':
             path=("Trust_data", "Temporary_Files"),
             name="ESR_Demographics_Combined"
         ),
-         "Merge as of": dict(
+        "Merge as of": dict(
             left_on="Employee Number",
             right_on="Employee Number",
             left_date="Absence Start Date",
