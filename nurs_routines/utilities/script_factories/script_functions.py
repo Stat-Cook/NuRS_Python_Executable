@@ -4,8 +4,15 @@ Supplies pipe-able APIs so that each function takes the operable data as
 the first argument.
 """
 import os
-from .. import Combiner, remove_pid, find_file, shuffle, \
-    split_apply, load_data, MergeAsOf, scramble_to_file, GetMonth, to_file
+
+from ..combiner import Combiner
+from ..io import find_file, load_data, to_file
+from ..utilities import shuffle
+from ..scrambler import scramble_to_file
+from ..merge_asof import MergeAsOf
+from ..month_tools import GetMonth
+from ..remove_pid import remove_pid
+from ..split_apply import split_apply
 
 
 class ScriptFunctionFactory:
