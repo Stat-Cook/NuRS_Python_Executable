@@ -9,20 +9,31 @@ Steps:
 4. Save to Temporary_Files ESR_Demographics_Combined.csv
 """
 import re
+import pandas as pd
 
-from .utilities import *
+from .utilities import ScriptFactory, check_file_names
 from .config import EXTRACT_PATH
 
 
-def extract_date_function(file):
+def extract_date_function(file: str):
+    """
+    Extract the date time from file name string.
+    Parameters
+    ----------
+    file: str
+        The file name being processed
+    Returns
+    -------
+    pd.datetime
+    """
     pattern = re.compile(r"(\d+)")
-    m = pattern.search(file)
-    if m:
-        date = pd.to_datetime(m.group(), yearfirst=True)
+    match = pattern.search(file)
+    if match:
+        date = pd.to_datetime(match.group(), yearfirst=True)
         if (date.year < 2025) and (date.year > 2000):
             return date
-        else:
-            return pd.to_datetime(m.group(), yearfirst=False)
+
+        return pd.to_datetime(match.group(), yearfirst=False)
 
     raise AttributeError("Date string not found in file name")
 
