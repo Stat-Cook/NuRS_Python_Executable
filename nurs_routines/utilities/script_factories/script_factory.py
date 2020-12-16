@@ -24,6 +24,19 @@ class ScriptFactory:
         self.functions = ScriptFunctionFactory().script_functions
         define_logger(extract_path, file_name)
 
+    def check_method_exists(self, string):
+        """
+        Check that the method has been implemented in the ScriptFunctionFactory
+        Parameters
+        ----------
+        string: str
+            method name to check
+        Returns
+        -------
+        bool
+        """
+        return string in self.functions
+
     def process_script(self):
         """
         Run through all commands in self.tasks applying them in order.
@@ -34,6 +47,8 @@ class ScriptFactory:
         """
         states = []
         for task, arguments in self.tasks.items():
+            assert self.check_method_exists(task)
+
             arguments = arguments or {}
             task = self.functions[task]
             if not states:
