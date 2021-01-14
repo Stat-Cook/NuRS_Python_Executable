@@ -38,18 +38,20 @@ def extract_date_function(file: str):
     raise AttributeError("Date string not found in file name")
 
 
+tasks = {
+    "Join file names": dict(file="ESR_Demographics"),
+    "Combine datasets": dict(extract_date_function=extract_date_function),
+    "Reset index": {},
+    "To file": dict(
+        extract_path=("Trust_data", "Temporary_Files"),
+        file_name="ESR_Demographics_Combined"
+    )
+}
+
 if __name__ == '__main__':
 
     check_file_names("ESR_Demographics")
     # NB: PID removal purposely not included.  Data set is not for export outside the Trust.
-    tasks = {
-        "Join file names": dict(file="ESR_Demographics"),
-        "Combine datasets": dict(extract_date_function=extract_date_function),
-        "Reset index": {},
-        "To file": dict(
-            extract_path=("Trust_data", "Temporary_Files"),
-            file_name="ESR_Demographics_Combined"
-        )
-    }
+
     routine = ScriptFactory(EXTRACT_PATH, "ESR_Demographics", tasks)
     routine.process_script()

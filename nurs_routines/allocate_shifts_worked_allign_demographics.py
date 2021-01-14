@@ -11,34 +11,33 @@ Steps:
 from .utilities import ScriptFactory
 from .config import EXTRACT_PATH
 
+tasks = {
+    "Find files": dict(
+        path=("Trust_data", "Temporary_Files"),
+        name="Allocate_Shifts_Worked_Combined"
+    ),
+    "Find more files": dict(
+        path=("Trust_data", "Temporary_Files"),
+        name="ESR_Demographics_Combined"
+    ),
+    "Merge as of": dict(
+        left_on="Staff Number",
+        right_on="Employee Number",
+        left_date="Duty Date",
+        right_date="Date_stamp"
+    ),
+    "Scramble as of": dict(
+        aggregate_columns=["Owning Unit", "Duty Date", "Shift"],
+        file_path="Trust_data/Temporary_Files/Temporary_Shift_Demographics.csv"
+    ),
+    "Remove PID": {},
+    "To file": dict(
+        extract_path=EXTRACT_PATH,
+        file_name="Allocate_Shifts_Worked_Demographics_Combined"
+    )
+}
 
 if __name__ == '__main__':
-
-    tasks = {
-        "Find files": dict(
-            path=("Trust_data", "Temporary_Files"),
-            name="Allocate_Shifts_Worked_Combined"
-        ),
-        "Find more files": dict(
-            path=("Trust_data", "Temporary_Files"),
-            name="ESR_Demographics_Combined"
-        ),
-        "Merge as of": dict(
-            left_on="Staff Number",
-            right_on="Employee Number",
-            left_date="Duty Date",
-            right_date="Date_stamp"
-        ),
-        "Scramble as of": dict(
-            aggregate_columns=["Owning Unit", "Duty Date", "Shift"],
-            file_path="Trust_data/Temporary_Files/Temporary_Shift_Demographics.csv"
-        ),
-        "Remove PID": {},
-        "To file": dict(
-            extract_path=EXTRACT_PATH,
-            file_name="Allocate_Shifts_Worked_Demographics_Combined"
-        )
-    }
 
     routine = ScriptFactory(
         EXTRACT_PATH, "Allocate_Shifts_Worked_Demographics_Combined", tasks

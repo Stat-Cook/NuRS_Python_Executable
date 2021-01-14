@@ -18,7 +18,7 @@ def find_file(path, name):
     name: str
         file name of interest
     """
-    _dir = os.listdir(path)
+    _dir = [i for i in os.listdir(path) if not i.startswith(".")]
     files = [i for i in _dir if name in i]
     if not files:
         raise FileNotFoundError(

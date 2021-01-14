@@ -11,18 +11,20 @@ Steps:
 from .utilities import check_file_names, ScriptFactory
 from .config import EXTRACT_PATH
 
+# PID purposefully not removed for later alignment.
+tasks = {
+    "Join file names": dict(file="Allocate_Shifts_Worked"),
+    "Combine datasets": {},
+    "Reset index": {},
+    "To file": dict(
+        extract_path=("Trust_data", "Temporary_Files"),
+        file_name="Allocate_Shifts_Worked_Combined"
+    )
+}
 
 if __name__ == '__main__':
 
     check_file_names("Allocate_Shifts_Worked")
-    # PID purposefully not removed for later allignment.
-    tasks = {
-        "Join file names": dict(file="Allocate_Shifts_Worked"),
-        "Combine datasets": {},
-        "Reset index": {},
-        "To file": dict(
-            extract_path=("Trust_data", "Temporary_Files"),
-            file_name="Allocate_Shifts_Worked_Combined")
-    }
+
     routine = ScriptFactory(EXTRACT_PATH, "Allocate_Shifts_Worked_Combined", tasks)
     routine.process_script()

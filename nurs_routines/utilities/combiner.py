@@ -40,7 +40,7 @@ class Combiner:
         """
         Check what files are at 'path'
         """
-        return os.listdir(self.path)
+        return [i for i in os.listdir(self.path) if not i.startswith(".")]
 
     @property
     def path(self):
