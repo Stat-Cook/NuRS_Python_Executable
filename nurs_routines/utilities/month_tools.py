@@ -54,6 +54,9 @@ class GetMonth:
         """
         zipped_months = zip(self.current_months, self.next_month)
 
+        data[start_column] = pd.to_datetime(data[start_column])
+        data[end_column] = pd.to_datetime(data[end_column])
+
         for start_of_month, end_of_month in zipped_months:
             month = data[
                 (data[start_column] < end_of_month) &
