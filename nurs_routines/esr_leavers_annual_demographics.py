@@ -26,7 +26,5 @@ if __name__ == '__main__':
 
     check_file_names("ESR_Leavers")
 
-
-
     routine = ScriptFactory(EXTRACT_PATH, "ESR_Leavers", tasks)
     routine.process_script()
