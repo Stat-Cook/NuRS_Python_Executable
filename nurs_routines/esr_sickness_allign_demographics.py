@@ -11,10 +11,9 @@ Steps:
 from .utilities import ScriptFactory
 from .config import EXTRACT_PATH
 
-if __name__ == '__main__':
 
-    tasks = {
-        "Find files": dict(path="Trust_data", name="ESR_Sickness"),
+tasks = {
+        "Find files": dict(path="Trust_data/Temporary_Files", name="ESR_Sickness_Combined.csv"),
         "Find more files": dict(
             path=("Trust_data", "Temporary_Files"),
             name="ESR_Demographics_Combined"
@@ -32,5 +31,8 @@ if __name__ == '__main__':
             file_name="ESR_Sickness_Demographics_Combined"
         )
     }
+
+if __name__ == '__main__':
+
     routine = ScriptFactory(EXTRACT_PATH, "ESR_Sickness_Demographics_Combined", tasks)
     routine.process_script()

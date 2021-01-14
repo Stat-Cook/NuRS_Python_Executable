@@ -10,28 +10,16 @@ Steps:
 from .utilities import check_file_names, ScriptFactory
 from .config import EXTRACT_PATH
 
-
-def main():
-    """
-    Main routine for combining Allocate Acuity data sets.
-    Returns
-    -------
-    (pandas.DataFrame, [processed steps])
-    """
-    check_file_names("Allocate_Acuity")
-
-    tasks = {
-        "Join file names": dict(file="Allocate_Acuity"),
-        "Combine datasets": {},
-        "Reset index": {},
-        "Remove PID": {},
-        "To file": dict(extract_path=EXTRACT_PATH, file_name="Allocate_Acuity_Combined")
-    }
-
-    routine = ScriptFactory(EXTRACT_PATH, "Allocate_Acuity_Combined", tasks)
-    return routine.process_script()
-
+tasks = {
+    "Join file names": dict(file="Allocate_Acuity"),
+    "Combine datasets": {},
+    "Reset index": {},
+    "Remove PID": {},
+    "To file": dict(extract_path=EXTRACT_PATH, file_name="Allocate_Acuity_Combined")
+}
 
 if __name__ == '__main__':
+    check_file_names("Allocate_Acuity")
 
-    main()
+    routine = ScriptFactory(EXTRACT_PATH, "Allocate_Acuity_Combined", tasks)
+    routine.process_script()
