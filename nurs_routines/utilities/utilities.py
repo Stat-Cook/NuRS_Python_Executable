@@ -28,7 +28,7 @@ def shuffle(frm, size_check, name=None):
     """
     n_cases, width = frm.shape
     if size_check:
-        if n_cases < 1:
+        if n_cases < 2:
             logging.warning("Not enough data to shuffle %s", name)
             return pd.DataFrame([width * [None]], columns=frm.columns)
     return frm.apply(lambda x: np.random.choice(x, frm.shape[0], replace=False))
