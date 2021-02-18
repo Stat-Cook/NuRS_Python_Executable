@@ -84,19 +84,14 @@ class MergeAsOf:
         left_data = self.date_sort(left_data, left_on)
         right_data = self.date_sort(right_data, right_on)
 
-        # left_data.loc[:, left_on] = pd.to_datetime(left_data[left_on])
-        # right_data.loc[:, right_on] = pd.to_datetime(right_data[right_on])
-        #
-        # left_data = left_data.sort_values(left_on)
-        # right_data = right_data.sort_values(right_on)
-
         right_cols = [i for i in right_data.columns if i not in left_data.columns]
         if left_on == right_on:
             right_cols += [right_on]
 
         return pd.merge_asof(left_data, right_data[right_cols], left_on=left_on, right_on=right_on)
 
-    def date_sort(self, data, date_column):
+    @staticmethod
+    def date_sort(data, date_column):
         """
         Sort a data set by a date column.
         Parameters
