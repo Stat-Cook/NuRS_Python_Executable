@@ -22,4 +22,4 @@ jobs:
           pip install -r requirements.txt
           pip install pylint
       - name: Lint with pylinter
-        run: pylint nurs_routines/utilities
+        run: pylint nurs_routines/utilities --fail-under=8
