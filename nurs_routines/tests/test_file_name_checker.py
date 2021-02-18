@@ -1,7 +1,6 @@
-import pytest
-
-from nurs_routines.tests.file_name_checker_fixtures import *
+from nurs_routines.tests.fixtures.file_name_checker_fixtures import *
 from nurs_routines.utilities import check_file_names
+from nurs_routines.utilities.file_structure import file_options
 
 
 def test_FileNameChecker_init():
