@@ -1,6 +1,4 @@
-import pytest
-
-from nurs_routines.tests.combiner_fixtures import *
+from nurs_routines.tests.fixtures.combiner_fixtures import *
 from nurs_routines.utilities import Combiner
 
 

@@ -1,9 +1,7 @@
 import os
-import pandas as pd
-import pytest
 
 from nurs_routines.utilities.io import find_file, load_data, merge_in_file, remove_file, to_file
-from nurs_routines.tests.io_fixtures import test_data_path, data_generator, to_file_frame
+from nurs_routines.tests.fixtures.io_fixtures import *
 
 
 def test_find_file(test_data_path):
