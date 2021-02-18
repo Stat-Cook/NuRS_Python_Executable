@@ -1,4 +1,4 @@
-name: Run Python Tests
+name: Run Pylint
 on:
   push:
     branches:
@@ -22,4 +22,4 @@ jobs:
           pip install -r requirements.txt
           pip install pylint
       - name: Lint with pylinter
-        run: pytest nurs_routines\utilities
+        run: pytest nurs_routines/utilities
