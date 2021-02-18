@@ -8,6 +8,8 @@ import logging
 import pandas as pd
 
 from .io import load_data
+from .combine_file import CombineFile
+
 
 class Combiner:
 
@@ -76,21 +78,13 @@ class Combiner:
         """
         for file in self.path_content:
             logging.info("Adding %s", file)
-            file_path = os.path.join(self.path, file)
-            new_data = load_data(file_path)
-
-            if extract_date_function:
-                new_data["Date_stamp"] = extract_date_function(file)
+            
+            combine_file = CombineFile(file, self.path, self.columns)
+            new_data = combine_file.process_file(extract_date_function)
 
             if self.columns is None:
                 self.columns = new_data.columns
 
-            # Check that the new files have the same headings as the first
-            if any(self.columns != new_data.columns):
-                raise Exception(
-                    "New data headings do not match first, error with file {}".format(file)
-
-                )
             yield new_data
 
     def read_and_combine(self, extract_date_function):
