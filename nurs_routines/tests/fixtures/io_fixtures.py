@@ -1,3 +1,4 @@
+"""Fixtures for test_io"""
 import pytest
 import numpy as np
 import pandas as pd
@@ -7,9 +8,6 @@ import pandas as pd
 def test_data_path():
     """
     Test fixture of data path
-    Returns
-    -------
-    str
     """
     return "nurs_routines/tests/test_data"
 
@@ -18,14 +16,11 @@ def test_data_path():
 def data_generator():
     """
     Test fixture to generate data samples.
-    Returns
-    -------
-    yield
     """
-    def generate(i, n, k):
+    def generate(i, n_cases, k):
         for _ in range(i):
             yield pd.DataFrame(
-                np.random.normal(size=[n, k])
+                np.random.normal(size=[n_cases, k])
             )
     return generate
 
@@ -34,9 +29,6 @@ def data_generator():
 def to_file_frame():
     """
     Text fixture - small data set to save to frame.
-    Returns
-    -------
-    pandas.DataFrame
     """
     return pd.DataFrame(dict(
         A=[1, 2, 3],
