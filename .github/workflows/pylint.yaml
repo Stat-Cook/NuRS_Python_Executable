@@ -25,4 +25,4 @@ jobs:
       - name: Lint with pylinter
         run: pylint nurs_routines/utilities --fail-under=8
       - name: Lint tests with pylinter
-        run: pylint --load-plugins=pylint_pytest  nurs_routines\tests\ --fail-under=8
+        run: pylint --load-plugins=pylint_pytest  nurs_routines/tests/ --fail-under=8
