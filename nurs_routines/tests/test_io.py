@@ -112,7 +112,7 @@ def test_merge_in_file_repetition(test_data_path, data_generator):
     merge_in_file(output, gen)
 
     gen = data_generator(10, 5, 2)
-    merge_in_file(output, gen)
+    merge_in_file(output, gen, delete_file=True)
 
     frame = pd.read_csv(output)
     n_cases, k = frame.shape
