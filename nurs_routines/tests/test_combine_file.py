@@ -7,6 +7,8 @@ import pytest
 from nurs_routines.tests.fixtures.combine_file_fixtures import \
     combiner_processor_no_expected_columns, combiner_processor_no_such_file, \
     combiner_processor_expected_columns, combiner_processor_too_few_columns
+from nurs_routines.tests.fixtures.combiner_fixtures import \
+    combine_data_path  # pylint: disable=unused-import
 
 
 def test_load_data(combiner_processor_no_expected_columns):

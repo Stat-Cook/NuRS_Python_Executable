@@ -5,7 +5,8 @@ import os
 import pytest
 
 from nurs_routines.tests.fixtures.file_name_checker_fixtures import file_name_checker_monthly,\
-    file_name_checker_quarterly, file_name_checker_full
+    file_name_checker_quarterly, file_name_checker_full, file_name_checker_quarterly_fails, \
+    file_name_checker_monthly_fails
 from nurs_routines.utilities import check_file_names
 from nurs_routines.utilities.file_structure import file_options
 from nurs_routines.utilities.file_name_checker import FileNameChecker

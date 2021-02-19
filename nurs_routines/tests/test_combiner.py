@@ -4,7 +4,8 @@ Unit tests for Combiner class.
 import os
 import pytest
 
-from nurs_routines.tests.fixtures.combiner_fixtures import combine
+from nurs_routines.tests.fixtures.combiner_fixtures import combine, \
+    combine_data_path  # pylint: disable=unused-import
 from nurs_routines.utilities import Combiner
 
 
