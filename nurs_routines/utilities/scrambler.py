@@ -52,11 +52,6 @@ def scramble_to_file(data, aggregate_cols, scrambling_cols, file, size_check=Tru
     -------
     pandas.DataFrame
     """
-    try:
-        os.remove(file)
-    except FileNotFoundError:
-        pass
-
     data = data.sort_values(aggregate_cols).reset_index(drop=True)
 
     shuffled_data = cached_split_apply(
