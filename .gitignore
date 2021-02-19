@@ -6,3 +6,6 @@
 
 !/Extract_data/.gitignore
 /Extract_data/
+
+.idea/
+*.pyc
