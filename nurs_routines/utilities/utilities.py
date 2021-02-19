@@ -52,7 +52,3 @@ def main_routine(instance):
     if isinstance(result, pd.DataFrame):
         return result.reset_index(drop=True)
     return result
-
-
-class InconsistentException(BaseException):
-    pass
