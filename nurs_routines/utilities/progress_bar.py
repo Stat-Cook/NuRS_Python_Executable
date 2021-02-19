@@ -31,6 +31,9 @@ class ProgressBar:
         percentage_done: float
             percentage completion
         """
+        if percentage_done > 100:
+            raise ValueError("Parameter `percentage done` greater than 100%.")
+
         blocks_done = int(blocks_done)
         progress_bar = "".join(["|", blocks_done * "X", (self.bar_width - blocks_done) * ".", "|"])
         progress_percent = " [{:.1f}%]".format(percentage_done)

@@ -7,7 +7,6 @@ import os
 import logging
 import pandas as pd
 
-from .io import load_data
 from .combine_file import CombineFile
 
 
@@ -59,7 +58,6 @@ class Combiner:
             raise FileNotFoundError("No directory {} found".format(path))
         self._path = path
 
-
     def iterate_through_path(self, extract_date_function):
         """
         For each data set at 'path':
@@ -78,7 +76,7 @@ class Combiner:
         """
         for file in self.path_content:
             logging.info("Adding %s", file)
-            
+
             combine_file = CombineFile(file, self.path, self.columns)
             new_data = combine_file.process_file(extract_date_function)
 
