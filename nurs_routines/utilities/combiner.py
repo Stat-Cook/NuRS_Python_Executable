@@ -52,9 +52,7 @@ class Combiner:
 
     @path.setter
     def path(self, path):
-        try:
-            assert os.path.isdir(path)
-        except AssertionError:
+        if not os.path.isdir(path):
             raise FileNotFoundError("No directory {} found".format(path))
         self._path = path
 

@@ -1,9 +1,8 @@
 """
 Tools for applying a function to a divided data set.
 """
-import pandas as pd
 import os
-import sys
+import pandas as pd
 
 from .io import merge_in_file
 from .progress_bar import progress_bar_iter
@@ -22,6 +21,8 @@ def split_apply(frm, groupby, func, size_check=False, sort_index=False):
         function to apply to each chunk of data
     size_check: bool
         boolean flag - if True check each chunk has more than 1 case.
+    sort_index: bool
+        if True sort index before returning data
 
     Returns
     -------
@@ -33,8 +34,8 @@ def split_apply(frm, groupby, func, size_check=False, sort_index=False):
 
     if sort_index:
         return merged.sort_index()
-    else:
-        return merged
+
+    return merged
 
 
 def cached_split_apply(frm, groupby, func, file, size_check=False):

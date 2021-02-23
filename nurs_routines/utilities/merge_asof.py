@@ -7,7 +7,7 @@ import pandas as pd
 
 from .grouped_frame import GroupedFrame
 from .progress_bar import ProgressBar
-
+from .io import merge_in_file
 
 pd.options.mode.chained_assignment = None
 
@@ -128,7 +128,7 @@ class MergeAsOf:
                 logging.debug("Merging %s.", value)
             yield self.merge_asof(value, left_on, right_on)
 
-    def main(self, left_on, right_on):
+    def main(self, left_on, right_on, cached_merge=True):
         """
         Iterate through values in 'data', and merge with 'reference' in a backward look up.
         Parameters
@@ -137,8 +137,14 @@ class MergeAsOf:
             the column in 'data' to merge on
         right_on: str
             the column in 'reference' to merge as of
+        cached_merge: bool
+            peform merge step by caching to local file.
         """
         values = self.iterate_merge(left_on, right_on)
-        result = pd.concat(values)
+        if cached_merge:
+            merge_in_file("temp.csv", values, delete_file=True)
+            result = pd.read_csv("temp.csv")
+        else:
+            result = pd.concat(values)
         print("\nMerge Completed\n")
         return result
