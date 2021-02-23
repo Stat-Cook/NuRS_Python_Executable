@@ -1,8 +1,6 @@
 """
 Tools for scrambling demographics in data sets.
 """
-import os
-
 from .utilities import shuffle
 from .split_apply import split_apply, cached_split_apply
 
