@@ -2,11 +2,14 @@
 Tools for applying a function to a divided data set.
 """
 import pandas as pd
+import os
+import sys
+
 from .io import merge_in_file
 from .progress_bar import progress_bar_iter
 
 
-def split_apply(frm, groupby, func, size_check=False):
+def split_apply(frm, groupby, func, size_check=False, sort_index=False):
     """
     Divide a data set based on a column and apply a function to each chunk
     Parameters
@@ -28,7 +31,10 @@ def split_apply(frm, groupby, func, size_check=False):
 
     merged = pd.concat(progress_bar_iter(grps, func, size_check))
 
-    return merged
+    if sort_index:
+        return merged.sort_index()
+    else:
+        return merged
 
 
 def cached_split_apply(frm, groupby, func, file, size_check=False):
@@ -54,8 +60,14 @@ def cached_split_apply(frm, groupby, func, file, size_check=False):
     """
     groups = frm.groupby(groupby)
 
+    if os.path.isfile(file):
+        os.remove(file)
+
     _iter = progress_bar_iter(groups, func, size_check)
     with open(file, "a") as output_file:
         merge_in_file(output_file, _iter)
 
-    return pd.read_csv(file)
+    result = pd.read_csv(file)
+    os.remove(file)
+
+    return result
