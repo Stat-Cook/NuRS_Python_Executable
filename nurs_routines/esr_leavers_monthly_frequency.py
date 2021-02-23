@@ -37,6 +37,7 @@ def monthly_frequency(data):
 
 tasks = {
     "Load data": dict(path="Trust_data", name="ESR_Leavers"),
+    "To datetime": dict(columns=["Termination Date"]),
     "Manipulate column": dict(
         new_column="Termination Month",
         old_column="Termination Date",

@@ -4,6 +4,7 @@ Supplies pipe-able APIs so that each function takes the operable data as
 the first argument.
 """
 import os
+import pandas as pd
 
 from ..combiner import Combiner
 from ..io import find_file, load_data, to_file
@@ -232,6 +233,25 @@ class ScriptFunctionFactory:
         """
         return Combiner(path).main(extract_date_function=extract_date_function)
 
+    def to_datetime(self, data, columns):
+        """
+        Cast columns of data to datetimes.
+        Parameters
+        ----------
+        data: pandas.DataFrame
+            Data set to be manipulated
+        columns: List[str] or str
+            Column(s) to be case to datetime.
+        Returns
+        -------
+        pandas.DataFrame
+        """
+        if not isinstance(columns, str):
+            data[columns] = data[columns].apply(pd.to_datetime)
+        else:
+            data[columns] = pd.to_datetime(data[columns])
+        return data
+
     @property
     def script_functions(self):
         """
@@ -248,6 +268,7 @@ class ScriptFunctionFactory:
             "Load data": self.load_data,
             "Combine datasets": self.combine_data_sets,
             "Manipulate column": self.manipulate_column,
+            "To datetime": self.to_datetime,
             "Reset index": lambda x: x.reset_index(drop=True),
             "Merge as of": self.merge_as_of,
             "Scramble": self.scramble,

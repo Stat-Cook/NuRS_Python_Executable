@@ -12,6 +12,7 @@ from .config import EXTRACT_PATH
 
 tasks = {
     "Load data": dict(path="Trust_data", name="ESR_Leavers"),
+    "To datetime": dict(columns=["Termination Date"]),
     "Manipulate column": dict(
         new_column="Termination Year",
         old_column="Termination Date",
