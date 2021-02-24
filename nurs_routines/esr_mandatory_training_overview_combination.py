@@ -21,7 +21,6 @@ tasks = {
 
 if __name__ == '__main__':
 
-    check_file_names("ESR_Mandatory_Training")
-
     routine = ScriptFactory(EXTRACT_PATH, "ESR_Mandatory_Training", tasks)
+    check_file_names("ESR_Mandatory_Training")
     routine.process_script()

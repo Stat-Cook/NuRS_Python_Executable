@@ -20,9 +20,6 @@ tasks = {
 
 if __name__ == '__main__':
 
-    check_file_names("Allocate_Assignment")
-
-
-
     routine = ScriptFactory(EXTRACT_PATH, "Allocate_Assignment_Combined", tasks)
+    check_file_names("Allocate_Assignment")
     routine.process_script()
