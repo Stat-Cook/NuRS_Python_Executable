@@ -5,7 +5,7 @@ Utilities for file IO.
 import os
 import logging
 import pandas as pd
-
+import pandas.errors
 
 def find_file(path, name):
     """
@@ -44,11 +44,15 @@ def load_data(file_path):
     file_path: str
         relative path to data set.
     """
-    if ".xls" in file_path:
-        # 'engine' unnecessary in later version of pandas:
-        return pd.read_excel(file_path, engine="openpyxl")
+    try:
+        if ".xls" in file_path:
+            # 'engine' unnecessary in later version of pandas:
+            return pd.read_excel(file_path, engine="openpyxl")
 
-    return pd.read_csv(file_path)
+        return pd.read_csv(file_path)
+    except pandas.errors.ParserError:
+        raise TypeError(f"File at {file_path} could not be read.  "
+                        f"Check file type and try again.")
 
 
 def merge_in_file(file, frame_iterable, delete_file=False):
