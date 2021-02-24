@@ -218,7 +218,7 @@ class ScriptFunctionFactory:
         return data
 
     @staticmethod
-    def combine_data_sets(path, extract_date_function=None):
+    def combine_data_sets(path, extract_date_function=None, progress_bar=False):
         """
         Binding to nurs_routines.utilites.combiner.Combiner.main.
         Parameters
@@ -231,7 +231,7 @@ class ScriptFunctionFactory:
         -------
         pandas.DataFrame
         """
-        return Combiner(path).main(extract_date_function=extract_date_function)
+        return Combiner(path, progress_bar).main(extract_date_function=extract_date_function)
 
     def to_datetime(self, data, columns):
         """
