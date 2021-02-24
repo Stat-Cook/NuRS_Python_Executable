@@ -86,7 +86,7 @@ class FileNameChecker:
         """
         logging.info("%s %s file(s).", len(data), report_type)
         if data:
-            logging.info("% file summary:", report_type)
+            logging.info("%s file summary:", report_type)
             for file in data:
                 logging.info("\tFile '%s' %s at '%s'", file, report_type, self.path)
             if raise_exception:
