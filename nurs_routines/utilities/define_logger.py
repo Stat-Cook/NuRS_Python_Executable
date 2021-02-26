@@ -22,10 +22,10 @@ def define_logger(extract_path, file_name):
     file_path = os.path.join(extract_path, "extract_logs", file_name)
     log_file = file_path + ".log"
 
-    logging.basicConfig(filename=log_file, level=logging.DEBUG)
+    logging.basicConfig(filename=log_file, level=logging.INFO)
 
     handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(logging.INFO)
+    handler.setLevel(logging.WARNING)
 
     logging.getLogger().addHandler(handler)
     logging.info("Logger open at %s", datetime.datetime.now())
