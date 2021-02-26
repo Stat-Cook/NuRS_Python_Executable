@@ -28,8 +28,7 @@ tasks = {
     ),
     "Scramble as of": dict(
         aggregate_columns=["Owning Unit", "Duty Date", "Shift"],
-        file_path="Trust_data/Temporary_Files/Temporary_Shift_Demographics.csv",
-        size_check=False
+        file_path="Trust_data/Temporary_Files/Temporary_Shift_Demographics.csv"
     ),
     "Remove PID": {},
     "To file": dict(
