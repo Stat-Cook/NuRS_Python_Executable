@@ -84,7 +84,6 @@ class GetMonth:
         for start_of_month, month in monthly_data:
             month[columns_to_shuffle] = shuffle(
                 frm=month[columns_to_shuffle],
-                size_check=True,
                 name=start_of_month
             )
 

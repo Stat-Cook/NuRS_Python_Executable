@@ -144,7 +144,7 @@ class ScriptFunctionFactory:
         return month_shuffler.grouped_monthly_shuffle(data[0], aggregate_columns, data[1])
 
     @staticmethod
-    def scramble_merge_as_of(data, aggregate_columns=None, file_path=None, size_check=True):
+    def scramble_merge_as_of(data, aggregate_columns=None, file_path=None):
         """
         Binding to nurs_routines.utilities.scrambler.scramble_to_file.
         Parameters
@@ -164,8 +164,7 @@ class ScriptFunctionFactory:
             data[0],
             aggregate_columns,
             data[1],
-            file_path,
-            size_check=size_check
+            file_path
         )
 
     @staticmethod

@@ -56,8 +56,7 @@ def scramble_to_file(data, aggregate_cols, scrambling_cols, file, size_check=Tru
         data[scrambling_cols + aggregate_cols],
         aggregate_cols,
         shuffle,
-        file,
-        size_check=size_check
+        file
     )
     shuffled_data = shuffled_data.reset_index(drop=True)
 

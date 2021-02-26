@@ -8,7 +8,7 @@ from .io import merge_in_file
 from .progress_bar import progress_bar_iter
 
 
-def split_apply(frm, groupby, func, size_check=False, sort_index=False):
+def split_apply(frm, groupby, func, sort_index=False):
     """
     Divide a data set based on a column and apply a function to each chunk
     Parameters
@@ -30,7 +30,7 @@ def split_apply(frm, groupby, func, size_check=False, sort_index=False):
     """
     grps = frm.groupby(groupby)
 
-    merged = pd.concat(progress_bar_iter(grps, func, size_check))
+    merged = pd.concat(progress_bar_iter(grps, func))
 
     if sort_index:
         return merged.sort_index()
@@ -38,7 +38,7 @@ def split_apply(frm, groupby, func, size_check=False, sort_index=False):
     return merged
 
 
-def cached_split_apply(frm, groupby, func, file, size_check=False):
+def cached_split_apply(frm, groupby, func, file):
     """
     Divide a data set based on a column and apply a function to each chunk.
     Recombine the data by caching to a temporary file.
@@ -64,7 +64,7 @@ def cached_split_apply(frm, groupby, func, file, size_check=False):
     if os.path.isfile(file):
         os.remove(file)
 
-    _iter = progress_bar_iter(groups, func, size_check)
+    _iter = progress_bar_iter(groups, func)
     with open(file, "a") as output_file:
         merge_in_file(output_file, _iter)
 
