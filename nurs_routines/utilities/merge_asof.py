@@ -17,10 +17,10 @@ class MergeAsOf:
     Aggregated-merge two datasets, based on the last relevant time in the reference set.
     Parameters
     ----------
-    data: pandas.DataFrame
-        The core dataset with dates to match.
-    reference: pandas.DataFrame
-        The lookup data set to match to.
+    data_path: str
+        path to core dataset with dates to match.
+    reference_path: str
+        path to lookup data set to match to.
     left_group: str
         The group to aggregate 'data' on
     right_group: str
@@ -32,10 +32,10 @@ class MergeAsOf:
         If true log file contains list of all merge keys.
     """
     # pylint:disable=too-many-arguments
-    def __init__(self, data, reference, left_group, right_group,
+    def __init__(self, data_path, reference_path, left_group, right_group,
                  earliest_date=datetime(1970, 1, 1), log_merge=False):
-        self.data = GroupedFrame(data, left_group)
-        self.reference = GroupedFrame(reference, right_group)
+        self.data = GroupedFrame(data_path, left_group)
+        self.reference = GroupedFrame(reference_path, right_group)
         self.earliest_date = earliest_date
         self.log_merge = log_merge
 
@@ -127,6 +127,24 @@ class MergeAsOf:
             if self.log_merge:
                 logging.debug("Merging %s.", value)
             yield self.merge_asof(value, left_on, right_on)
+
+    @property
+    def overlap(self):
+        in_both = [i for i in self.data.options if i in self.reference.options]
+        in_data = [i for i in self.data.options if i not in self.reference.options]
+        in_reference = [i for i in self.reference.options if i not in self.data.options]
+        return {
+            "In Both": in_both,
+            "Only in Data": in_data,
+            "Only in Ref": in_reference
+        }
+
+    def overlap_report_to_file(self, file):
+        with open(file, "w") as f:
+            for i in self.overlap:
+                f.write(f"{i}:\n")
+                f.writelines("\n".join(self.overlap[i]))
+                f.write("\n")
 
     def main(self, left_on, right_on, cached_merge=True):
         """
