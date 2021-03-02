@@ -28,9 +28,10 @@ def split_apply(frm, groupby, func, sort_index=False):
     -------
     pandas.DataFrame
     """
-    grps = frm.groupby(groupby)
+    #grps = frm.groupby(groupby)
+    groups = frm.set_index(groupby).groupby(lambda x: x)
 
-    merged = pd.concat(progress_bar_iter(grps, func))
+    merged = pd.concat(progress_bar_iter(groups, func))
 
     if sort_index:
         return merged.sort_index()
@@ -59,7 +60,8 @@ def cached_split_apply(frm, groupby, func, file):
     -------
     pandas.DataFrame
     """
-    groups = frm.groupby(groupby)
+    # groups = frm.groupby(groupby)
+    groups = frm.set_index(groupby).groupby(lambda x: x)
 
     if os.path.isfile(file):
         os.remove(file)
