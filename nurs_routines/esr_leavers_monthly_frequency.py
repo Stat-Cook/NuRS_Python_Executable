@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 
 from .utilities import check_file_names, ScriptFactory
-from .config import EXTRACT_PATH
+from .config import EXTRACT_PATH, ALLOCATE_WARD_COLUMN
 
 FILE_NAME = "ESR_Leavers"
 
@@ -27,7 +27,7 @@ def monthly_frequency(data):
     -------
     pandas.DataFrame
     """
-    grps = data.groupby(["Organisation", "Termination Month", "Leaving Reason"])
+    grps = data.groupby([ALLOCATE_WARD_COLUMN, "Termination Month", "Leaving Reason"])
     result = pd.DataFrame(
         [np.concatenate((i, j.shape))[:-1] for i, j in grps]
     )
