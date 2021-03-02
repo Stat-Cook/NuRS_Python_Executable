@@ -22,7 +22,7 @@ def test_split_apply(split_apply_frm, split_apply_increment_frm):
 
 def test_split_apply2(split_apply_frm, split_apply_increment_frm):
     """Check split_apply performs as expected"""
-    result = split_apply(split_apply_frm, "ID2", split_function, sort_index=True)
+    result = split_apply(split_apply_frm, "ID2", split_function)
     assert (result == split_apply_increment_frm).values.all()
 
 

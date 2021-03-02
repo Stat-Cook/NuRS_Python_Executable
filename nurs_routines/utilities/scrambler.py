@@ -33,7 +33,7 @@ def scramble(data, aggregate_cols, scrambling_cols):
     return data
 
 
-def scramble_to_file(data, aggregate_cols, scrambling_cols, file, size_check=True):
+def scramble_to_file(data, aggregate_cols, scrambling_cols, file):
     """
     Scramble columns while data is aggregated using file cache to concatenate
     Parameters

@@ -24,8 +24,7 @@ tasks = {
             left_date="Absence Start Date",
             right_date="Date_stamp"
         ),
-        "Scramble in months": dict(aggregate_columns="Organisation",
-                                   size_check=True),
+        "Scramble in months": dict(aggregate_columns="Organisation"),
         "Remove PID": {},
         "To file": dict(
             extract_path=EXTRACT_PATH,
