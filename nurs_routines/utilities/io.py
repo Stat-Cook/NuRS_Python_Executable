@@ -55,7 +55,7 @@ def load_data(file_path):
                         f"Check file type and try again.")
 
 
-def merge_in_file(file, frame_iterable, delete_file=False):
+def merge_in_file(file, frame_iterable, delete_file=False, index=False):
     """
     Concatenate pandas frames by writing them to file.
     Parameters
@@ -66,6 +66,7 @@ def merge_in_file(file, frame_iterable, delete_file=False):
         a collection of data frames to concat.
     delete_file: bool
         Remove file if it all ready exists.
+    drop_index
     """
     if delete_file and os.path.isfile(file):
         os.remove(file)
@@ -73,10 +74,10 @@ def merge_in_file(file, frame_iterable, delete_file=False):
     _iter = iter(frame_iterable)
     # Write first to file with headings.
     frame = next(frame_iterable)
-    frame.to_csv(file, mode="a", header=True, index=False)
+    frame.to_csv(file, mode="a", header=True, index=index)
     # Iterate over the rest without headings.
     for frame in frame_iterable:
-        frame.to_csv(file, mode='a', header=False, index=False)
+        frame.to_csv(file, mode='a', header=False, index=index)
 
 
 def to_file(data, path, file_name):
