@@ -9,7 +9,7 @@ Steps:
 6. Save to file ESR_Sickness_Demographics_Combined.csv
 """
 from .utilities import ScriptFactory
-from .config import EXTRACT_PATH
+from .config import EXTRACT_PATH, ALLOCATE_WARD_COLUMN
 
 
 tasks = {
@@ -24,7 +24,7 @@ tasks = {
             left_date="Absence Start Date",
             right_date="Date_stamp"
         ),
-        "Scramble in months": dict(aggregate_columns="Organisation"),
+        "Scramble in months": dict(aggregate_columns=ALLOCATE_WARD_COLUMN),
         "Remove PID": {},
         "To file": dict(
             extract_path=EXTRACT_PATH,

@@ -8,7 +8,7 @@ Steps:
 5. Save to file Leavers_Annual_Demographics.csv
 """
 from .utilities import ScriptFactory, check_file_names
-from .config import EXTRACT_PATH
+from .config import EXTRACT_PATH, ALLOCATE_WARD_COLUMN
 
 tasks = {
     "Load data": dict(path="Trust_data", name="ESR_Leavers"),
@@ -19,7 +19,7 @@ tasks = {
         function=lambda x: x.year
     ),
     "Remove PID": {},
-    "Scramble": dict(keys=["Organisation", "Termination Year"]),
+    "Scramble": dict(keys=[ALLOCATE_WARD_COLUMN, "Termination Year"]),
     "To file": dict(extract_path=EXTRACT_PATH, file_name="Leavers_Annual_Demographics")
 }
 
