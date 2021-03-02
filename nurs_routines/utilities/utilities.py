@@ -30,7 +30,7 @@ def shuffle(frm, name=None):
 
     if n_cases < 2:
         logging.info("Not enough data to shuffle %s", name)
-        return pd.DataFrame([width * [None]], columns=frm.columns)
+        return pd.DataFrame(columns=frm.columns, index=frm.index)
 
     return frm.apply(lambda x: np.random.choice(x, frm.shape[0], replace=False))
 
