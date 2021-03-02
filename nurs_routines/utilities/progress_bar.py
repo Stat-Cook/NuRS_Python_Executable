@@ -49,7 +49,7 @@ class ProgressBar:
         self.update(blocks_done, percentage*100)
 
 
-def progress_bar_iter(groups, func, size_check, bar_size=20):
+def progress_bar_iter(groups, func, bar_size=20):
     """
     For a group DataFrame, iterate through and apply 'func' at each step.
 
@@ -69,4 +69,4 @@ def progress_bar_iter(groups, func, size_check, bar_size=20):
     for i, j in groups:
         progress.step()
         # logging.debug("Shuffling data for: {}".format(i))
-        yield func(j, size_check, i)
+        yield func(j, i)

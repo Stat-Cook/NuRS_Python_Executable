@@ -8,6 +8,7 @@ import logging
 import pandas as pd
 
 from .combine_file import CombineFile
+from .progress_bar import ProgressBar
 
 
 class Combiner:
@@ -31,8 +32,9 @@ class Combiner:
 
     """
 
-    def __init__(self, path: str):
+    def __init__(self, path: str, progress_bar=False):
         self.path = path
+        self.progress_bar = progress_bar
         self.data = None
         self.columns = None
 
@@ -72,11 +74,16 @@ class Combiner:
                 will need to pass in and return data.
 
         """
+        if self.progress_bar:
+            progress = ProgressBar(20, len(self.path_content))
+
         for file in self.path_content:
             logging.info("Adding %s", file)
 
             combine_file = CombineFile(file, self.path, self.columns)
             new_data = combine_file.process_file(extract_date_function)
+            if self.progress_bar:
+                progress.step()
 
             if self.columns is None:
                 self.columns = new_data.columns

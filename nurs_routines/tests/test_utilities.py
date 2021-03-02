@@ -3,6 +3,7 @@ Unit tests for functions in nurs_routines.utilities.utilities
 """
 import pandas as pd
 import pytest
+import logging
 
 from nurs_routines.utilities.utilities import shuffle
 
@@ -22,28 +23,23 @@ def shuffling_frame():
     ))
 
 
-def test_shuffle_fails(small_shuffling_frame):
-    """Check shuffler doesn't shuffle small data sets if size_check False."""
-    shuffled = shuffle(small_shuffling_frame, size_check=False)
-
-    assert (shuffled == small_shuffling_frame).values.all()
-
-
 def test_shuffle_logs_message(small_shuffling_frame, caplog):
-    """Check shuffler raises message when shuffle small data sets if size_check True."""
-    shuffle(small_shuffling_frame, True)
+    """Check shuffler raises message when shuffle small data sets."""
+    caplog.set_level(logging.INFO)
+    shuffle(small_shuffling_frame)
     assert caplog.records
 
 
 def test_shuffle_logs_warning(small_shuffling_frame, caplog):
-    """Check shuffler raises Warning when shuffle small data sets if size_check True."""
-    shuffle(small_shuffling_frame, True)
-    assert all(record.levelname == "WARNING" for record in caplog.records)
+    """Check shuffler raises Warning when shuffle small data set."""
+    caplog.set_level(logging.INFO)
+    shuffle(small_shuffling_frame)
+    assert all(record.levelname == "INFO" for record in caplog.records)
 
 
 def test_shuffle_returns_nans(small_shuffling_frame):
-    """Check shuffler returns nans when shuffling small data sets if size_check True."""
-    frm = shuffle(small_shuffling_frame, True)
+    """Check shuffler returns nans when shuffling small data sets."""
+    frm = shuffle(small_shuffling_frame)
     assert frm.isna().values.all()
 
 

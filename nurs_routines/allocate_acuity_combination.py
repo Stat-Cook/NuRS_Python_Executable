@@ -19,7 +19,7 @@ tasks = {
 }
 
 if __name__ == '__main__':
-    check_file_names("Allocate_Acuity")
 
     routine = ScriptFactory(EXTRACT_PATH, "Allocate_Acuity_Combined", tasks)
+    check_file_names("Allocate_Acuity")
     routine.process_script()

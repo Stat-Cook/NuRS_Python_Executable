@@ -4,6 +4,7 @@ Supplies pipe-able APIs so that each function takes the operable data as
 the first argument.
 """
 import os
+import pandas as pd
 
 from ..combiner import Combiner
 from ..io import find_file, load_data, to_file
@@ -143,7 +144,7 @@ class ScriptFunctionFactory:
         return month_shuffler.grouped_monthly_shuffle(data[0], aggregate_columns, data[1])
 
     @staticmethod
-    def scramble_merge_as_of(data, aggregate_columns=None, file_path=None, size_check=True):
+    def scramble_merge_as_of(data, aggregate_columns=None, file_path=None):
         """
         Binding to nurs_routines.utilities.scrambler.scramble_to_file.
         Parameters
@@ -163,8 +164,7 @@ class ScriptFunctionFactory:
             data[0],
             aggregate_columns,
             data[1],
-            file_path,
-            size_check=size_check
+            file_path
         )
 
     @staticmethod
@@ -217,7 +217,7 @@ class ScriptFunctionFactory:
         return data
 
     @staticmethod
-    def combine_data_sets(path, extract_date_function=None):
+    def combine_data_sets(path, extract_date_function=None, progress_bar=False):
         """
         Binding to nurs_routines.utilites.combiner.Combiner.main.
         Parameters
@@ -230,7 +230,26 @@ class ScriptFunctionFactory:
         -------
         pandas.DataFrame
         """
-        return Combiner(path).main(extract_date_function=extract_date_function)
+        return Combiner(path, progress_bar).main(extract_date_function=extract_date_function)
+
+    def to_datetime(self, data, columns):
+        """
+        Cast columns of data to datetimes.
+        Parameters
+        ----------
+        data: pandas.DataFrame
+            Data set to be manipulated
+        columns: List[str] or str
+            Column(s) to be case to datetime.
+        Returns
+        -------
+        pandas.DataFrame
+        """
+        if not isinstance(columns, str):
+            data[columns] = data[columns].apply(pd.to_datetime)
+        else:
+            data[columns] = pd.to_datetime(data[columns])
+        return data
 
     @property
     def script_functions(self):
@@ -248,6 +267,7 @@ class ScriptFunctionFactory:
             "Load data": self.load_data,
             "Combine datasets": self.combine_data_sets,
             "Manipulate column": self.manipulate_column,
+            "To datetime": self.to_datetime,
             "Reset index": lambda x: x.reset_index(drop=True),
             "Merge as of": self.merge_as_of,
             "Scramble": self.scramble,

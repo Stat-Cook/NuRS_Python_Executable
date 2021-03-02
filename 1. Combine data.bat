@@ -10,6 +10,7 @@ call python -m nurs_routines.allocate_assignment_combination
 call python -m nurs_routines.esr_leavers_annual_demographics
 call python -m nurs_routines.esr_leavers_monthly_frequency
 call python -m nurs_routines.esr_mandatory_training_overview_combination
+call python -m nurs_routines.esr_sickness_combination
 call python -m nurs_routines.esr_sickness_extract
 
 pause

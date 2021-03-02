@@ -50,8 +50,7 @@ tasks = {
 
 if __name__ == '__main__':
 
-    check_file_names("ESR_Demographics")
     # NB: PID removal purposely not included.  Data set is not for export outside the Trust.
-
     routine = ScriptFactory(EXTRACT_PATH, "ESR_Demographics", tasks)
+    check_file_names("ESR_Demographics")
     routine.process_script()

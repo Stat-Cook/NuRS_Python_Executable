@@ -21,5 +21,6 @@ tasks = {
 }
 
 if __name__ == "__main__":
+
     routine = ScriptFactory(EXTRACT_PATH, "ESR_Sickness", tasks)
     routine.process_script()

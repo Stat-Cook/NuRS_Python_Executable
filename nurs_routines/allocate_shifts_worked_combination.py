@@ -14,7 +14,7 @@ from .config import EXTRACT_PATH
 # PID purposefully not removed for later alignment.
 tasks = {
     "Join file names": dict(file="Allocate_Shifts_Worked"),
-    "Combine datasets": {},
+    "Combine datasets": dict(progress_bar=True),
     "Reset index": {},
     "To file": dict(
         extract_path=("Trust_data", "Temporary_Files"),
@@ -24,7 +24,6 @@ tasks = {
 
 if __name__ == '__main__':
 
-    check_file_names("Allocate_Shifts_Worked")
-
     routine = ScriptFactory(EXTRACT_PATH, "Allocate_Shifts_Worked_Combined", tasks)
+    check_file_names("Allocate_Shifts_Worked")
     routine.process_script()

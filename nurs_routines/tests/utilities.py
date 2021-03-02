@@ -134,3 +134,25 @@ if __name__ == '__main__':
     make_quarterly_files("file_names/Quarterly_data")
     generate_poor_file_names("file_names/Monthly_data_failure", make_monthly_files)
     generate_poor_file_names("file_names/Quarterly_data_failure", make_quarterly_files)
+
+    users = list("ABCD")
+    dates = pd.date_range("2015-01-01", "2020-01-01")
+
+    pd.DataFrame({
+        'user': np.concatenate([3*list(user) for user in users]),
+        'date': 4*["2000-01-01", "2017-01-01", "2020-01-01"],
+        "extra": 1
+    }).to_csv("test_data/merge_data.csv")
+
+    pd.DataFrame({
+        'user': np.concatenate([3*list(user) for user in "ABCDEF"]),
+        'date': 6*["2000-01-01", "2017-01-01", "2020-01-01"]
+    }).to_csv("test_data/merge_data_extra_bodies.csv")
+
+    dates = ['2015-01-16', '2015-02-05',
+             '2015-05-19', '2016-06-14', '2018-02-25']
+    pd.DataFrame(
+        {'user': np.concatenate([5 * list(user) for user in users]),
+         'date': 4 * dates, 'value': 4 * list(range(5)),
+         "value2": range(20), "extra": 2}
+    ).to_csv("test_data/merge_reference.csv")

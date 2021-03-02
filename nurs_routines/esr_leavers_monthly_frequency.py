@@ -37,6 +37,7 @@ def monthly_frequency(data):
 
 tasks = {
     "Load data": dict(path="Trust_data", name="ESR_Leavers"),
+    "To datetime": dict(columns=["Termination Date"]),
     "Manipulate column": dict(
         new_column="Termination Month",
         old_column="Termination Date",
@@ -49,7 +50,6 @@ tasks = {
 
 if __name__ == '__main__':
 
-    check_file_names("ESR_Leavers")
-
     routine = ScriptFactory(EXTRACT_PATH, "ESR_Leavers", tasks)
+    check_file_names("ESR_Leavers")
     routine.process_script()
