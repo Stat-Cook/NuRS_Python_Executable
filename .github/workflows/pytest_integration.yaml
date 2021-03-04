@@ -21,6 +21,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Generate integration data
-        run: integration_data/set_up_data.bat
+        run: integration_data\set_up_data.bat
       - name: Run tests with pytest
         run: pytest nurs_routines
