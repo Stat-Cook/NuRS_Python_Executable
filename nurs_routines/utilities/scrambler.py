@@ -23,7 +23,7 @@ def scramble(data, aggregate_cols, scrambling_cols):
     data = data.sort_values(aggregate_cols).reset_index(drop=True)
 
     shuffled_data = split_apply(
-        data[scrambling_cols + aggregate_cols],
+        data[set(scrambling_cols + aggregate_cols)],
         aggregate_cols,
         shuffle
     )
@@ -53,7 +53,7 @@ def scramble_to_file(data, aggregate_cols, scrambling_cols, file):
     data = data.sort_values(aggregate_cols).reset_index(drop=True)
 
     shuffled_data = cached_split_apply(
-        data[scrambling_cols + aggregate_cols],
+        data[set(scrambling_cols + aggregate_cols)],
         aggregate_cols,
         shuffle,
         file
