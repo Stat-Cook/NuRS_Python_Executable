@@ -1,0 +1,29 @@
+name: Run Python Integration Tests
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Python 3
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Generate test data
+        run: |
+          python integration_tests/generate_merge_shuffle_data_set.py
+          python -m integration_tests.end_to_end_merge_test
+          python -m integration_tests.end_to_end_merge_shuffle_test
+      - name: Run integration tests with pytest
+        run: pytest integration_tests
