@@ -2,11 +2,14 @@
 Unit tests for split_apply function.
 """
 import os
+import numpy as np
 
 from nurs_routines.utilities.split_apply import split_apply, cached_split_apply
 from nurs_routines.tests.fixtures.split_apply_fixtures import split_apply_frm, \
     split_apply_increment_frm
+from nurs_routines.tests.fixtures.scrambler_fixtures import mixed_size_scramble_data
 from nurs_routines.tests.utilities import increment_column
+from nurs_routines.utilities import shuffle
 
 
 def split_function(frm, *args):  # pylint: disable=unused-argument
@@ -57,3 +60,21 @@ def test_cached_split_apply_removes_file(split_apply_frm, split_apply_increment_
     """Check cached split apply cleans up temporary files."""
     cached_split_apply(split_apply_frm, "ID", split_function, "temp")
     assert "temp" not in os.listdir()
+
+
+def test_split_apply_shuffle(split_apply_frm):
+    raw_means = split_apply_frm.groupby("ID").mean()
+    result = split_apply(split_apply_frm, ["ID"], shuffle)
+    shuffle_means = result.groupby("ID").mean()
+    assert (shuffle_means == raw_means).values.all()
+
+
+def test_split_apply_shuffle_breaks_corr(split_apply_frm):
+    result = split_apply(split_apply_frm, ["ID"], shuffle)
+    cov_matrix = np.cov(result["Value"], split_apply_frm["Value"])
+    assert cov_matrix[0, 0] != cov_matrix[0, 1]
+
+
+def test_split_apply_shuffle_some_small(mixed_size_scramble_data):
+    result = split_apply(mixed_size_scramble_data, ["A"], shuffle)
+    assert result["B"].isna().any()
