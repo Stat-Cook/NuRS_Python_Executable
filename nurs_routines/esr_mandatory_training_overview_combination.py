@@ -9,11 +9,12 @@ Steps:
 """
 from .utilities import ScriptFactory, check_file_names
 from .config import EXTRACT_PATH
+from .esr_demographics_combination import extract_date_function
 
 
 tasks = {
     "Join file names": dict(file="ESR_Mandatory_Training"),
-    "Combine datasets": {},
+    "Combine datasets": dict(extract_date_function=extract_date_function),
     "Reset index": {},
     "Remove PID": {},
     "To file": dict(extract_path=EXTRACT_PATH, file_name="ESR_Mandatory_Training")
