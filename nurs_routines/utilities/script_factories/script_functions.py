@@ -96,7 +96,7 @@ class ScriptFunctionFactory:
         return [file] + [self.find_file(name, path)]
 
     @staticmethod
-    def merge_as_of(paths, left_on, right_on, left_date, right_date):
+    def merge_as_of(paths, left_on, right_on, left_date, right_date, report_path=None):
         """
         Binding to nurs_routines.merge_asof.MergeAsOf.main routine.
         Allows for alignment of two data sets via the lockback method.
@@ -120,7 +120,7 @@ class ScriptFunctionFactory:
         """
         assert len(paths) == 2
         merger = MergeAsOf(*paths, left_on, right_on)
-        merged_data = merger.main(left_date, right_date)
+        merged_data = merger.main(left_date, right_date, report_path=report_path)
         return (
             merged_data,
             [i for i in merger.reference.columns if i in merged_data.columns]
@@ -251,6 +251,9 @@ class ScriptFunctionFactory:
             data[columns] = pd.to_datetime(data[columns])
         return data
 
+    def inject_data(self, data):
+        return data
+
     @property
     def script_functions(self):
         """
@@ -261,6 +264,7 @@ class ScriptFunctionFactory:
         """
         return {
             "Apply function": lambda data, function: function(data),
+            "Inject data": self.inject_data,
             "Join file names": lambda file: os.path.join("Trust_data", file),
             "Find files": self.find_file,
             "Find more files": self.find_more_files,
