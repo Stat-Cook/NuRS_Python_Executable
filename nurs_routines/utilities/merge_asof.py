@@ -91,7 +91,7 @@ class MergeAsOf:
         return pd.merge_asof(left_data, right_data[right_cols], left_on=left_on, right_on=right_on)
 
     @staticmethod
-    def date_sort(data, date_column):
+    def date_sort(data, date_column, replace_date=datetime(2050, 1, 1)):
         """
         Sort a data set by a date column.
         Parameters
@@ -105,7 +105,12 @@ class MergeAsOf:
         -------
         pandas.DataFrame
         """
-        data.loc[:, date_column] = pd.to_datetime(data[date_column])
+        try:
+            data.loc[:, date_column] = pd.to_datetime(data[date_column])
+        except pd.errors.OutOfBoundsDatetime:
+            date_coerce = pd.to_datetime(data[date_column], errors="coerce")
+            date_coerce[date_coerce.isna()] = replace_date
+            data.loc[:, date_column] = date_coerce
         return data.sort_values(date_column)
 
     def iterate_merge(self, left_on, right_on):
@@ -146,7 +151,7 @@ class MergeAsOf:
                 f.writelines("\n".join(self.overlap[i]))
                 f.write("\n")
 
-    def main(self, left_on, right_on, cached_merge=True):
+    def main(self, left_on, right_on, cached_merge=True, report_path=None):
         """
         Iterate through values in 'data', and merge with 'reference' in a backward look up.
         Parameters
@@ -157,7 +162,12 @@ class MergeAsOf:
             the column in 'reference' to merge as of
         cached_merge: bool
             peform merge step by caching to local file.
+        report_path: str
+            File path to report overlap to.
         """
+        if report_path:
+            self.overlap_report_to_file(report_path)
+
         values = self.iterate_merge(left_on, right_on)
         if cached_merge:
             merge_in_file("temp.csv", values, delete_file=True)
