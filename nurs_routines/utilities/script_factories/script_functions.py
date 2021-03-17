@@ -175,7 +175,7 @@ class ScriptFunctionFactory:
         )
 
     @staticmethod
-    def to_file_scripted(data, extract_path, file_name):
+    def to_file_scripted(data, extract_path, file_name, index=False):
         """
         Binding to nurs_routines.utilites.io.to_file.
         Parameters
@@ -186,6 +186,8 @@ class ScriptFunctionFactory:
             Path for export
         file_name: str
             Name of file for export.
+        index: bool
+            Include frame index as first column.
         Returns
         -------
         pandas.DataFrame
@@ -193,7 +195,7 @@ class ScriptFunctionFactory:
         if not isinstance(extract_path, str):
             extract_path = os.path.join(*extract_path)
 
-        to_file(data, extract_path, file_name + ".csv")
+        to_file(data, extract_path, file_name + ".csv", index=index)
 
         print("Complete - data written to {}".format(
             os.path.join(extract_path, file_name + ".csv")
@@ -261,6 +263,10 @@ class ScriptFunctionFactory:
     def inject_data(self, data):
         return data
 
+    def is_na(self, data):
+        result = data.isna().mean()
+        return result
+
     @property
     def script_functions(self):
         """
@@ -285,5 +291,6 @@ class ScriptFunctionFactory:
             "Scramble as of": self.scramble_merge_as_of,
             "Scramble in months": self.month_shuffler,
             "Remove PID": remove_pid,
-            "To file": self.to_file_scripted
+            "To file": self.to_file_scripted,
+            "Is NA": self.is_na
         }
