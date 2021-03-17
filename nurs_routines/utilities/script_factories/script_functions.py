@@ -96,10 +96,11 @@ class ScriptFunctionFactory:
         return [file] + [self.find_file(name, path)]
 
     @staticmethod
-    def merge_as_of(paths, left_on, right_on, left_date, right_date, report_path=None):
+    def merge_as_of(paths, left_on, right_on, left_date, right_date,
+                    report_path=None, no_pid_report_path=None):
         """
         Binding to nurs_routines.merge_asof.MergeAsOf.main routine.
-        Allows for alignment of two data sets via the lockback method.
+        Allows for alignment of two data sets via the look back method.
         Parameters
         ----------
         paths: List[str]
@@ -114,13 +115,19 @@ class ScriptFunctionFactory:
             column in 'left' to look up from
         right_date: str
             column in 'right' to look back to.
+        report_path: str
+            File path to report overlap to.
+        no_pid_report_path: str
+            File path to report the quantity of overlap to.
         Returns
         -------
         pandas.DataFrame
         """
         assert len(paths) == 2
         merger = MergeAsOf(*paths, left_on, right_on)
-        merged_data = merger.main(left_date, right_date, report_path=report_path)
+        merged_data = merger.main(left_date, right_date,
+                                  report_path=report_path,
+                                  no_pid_report_path=no_pid_report_path)
         return (
             merged_data,
             [i for i in merger.reference.columns if i in merged_data.columns]

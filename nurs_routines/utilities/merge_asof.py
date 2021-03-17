@@ -151,7 +151,13 @@ class MergeAsOf:
                 f.writelines("\n".join(self.overlap[i]))
                 f.write("\n")
 
-    def main(self, left_on, right_on, cached_merge=True, report_path=None):
+    def pid_less_report_to_file(self, file):
+        with open(file, "w") as f:
+            for key, value in self.overlap.items():
+                f.write(f"{key}: {len(value)}\n")
+
+    def main(self, left_on, right_on, cached_merge=True,
+             report_path=None, no_pid_report_path=None):
         """
         Iterate through values in 'data', and merge with 'reference' in a backward look up.
         Parameters
@@ -164,9 +170,14 @@ class MergeAsOf:
             peform merge step by caching to local file.
         report_path: str
             File path to report overlap to.
+        no_pid_report_path: str
+            File path to report the quantity of overlap to.
         """
         if report_path:
             self.overlap_report_to_file(report_path)
+
+        if no_pid_report_path:
+            self.pid_less_report_to_file(no_pid_report_path)
 
         values = self.iterate_merge(left_on, right_on)
         if cached_merge:
