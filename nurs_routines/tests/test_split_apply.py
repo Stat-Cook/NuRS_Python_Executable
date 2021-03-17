@@ -78,3 +78,8 @@ def test_split_apply_shuffle_breaks_corr(split_apply_frm):
 def test_split_apply_shuffle_some_small(mixed_size_scramble_data):
     result = split_apply(mixed_size_scramble_data, ["A"], shuffle)
     assert result["B"].isna().any()
+
+
+def test_split_apply_check_end_size(mixed_size_scramble_data):
+    result = split_apply(mixed_size_scramble_data, ["A"], shuffle)
+    assert result.shape[0] == mixed_size_scramble_data.shape[0]
