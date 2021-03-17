@@ -80,7 +80,7 @@ def merge_in_file(file, frame_iterable, delete_file=False, index=False):
         frame.to_csv(file, mode='a', header=False, index=index)
 
 
-def to_file(data, path, file_name):
+def to_file(data, path, file_name, index=False):
     """
     Write data to a location.
     Parameters
@@ -93,7 +93,7 @@ def to_file(data, path, file_name):
         name for file
     """
     export_file = os.path.join(path, file_name)
-    data.to_csv(export_file, index=False)
+    data.to_csv(export_file, index=index)
     logging.info("Data written to  %s", export_file)
 
 
