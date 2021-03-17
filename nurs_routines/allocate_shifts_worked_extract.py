@@ -1,12 +1,10 @@
 """
-Add ESR Demographics data to Allocate Shift Worked data sets into a single file.
+Extract Allocate Shift Worked data without PID into a single file:
 Steps:
 1. Find file Allocate_Shifts_Worked_Combined.csv
-2. Find file ESR_Demographics_Combined.csv
-3. Merge the files by Employee number looking backwards in date.
-4. Scramble the data at Ward-Date-Shift level
-5. Remove any PID.
-6. Save to file Allocate_Shifts_Worked_Demographics_Combined.csv
+2. Remove any PID.
+3. Save to file Allocate_Shifts_Worked.csv
+
 """
 from .utilities import ScriptFactory
 from .config import EXTRACT_PATH
