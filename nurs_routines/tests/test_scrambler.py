@@ -4,7 +4,8 @@ Unit tests for scramble functions
 import pandas as pd
 from nurs_routines.utilities.scrambler import scramble, scramble_to_file
 from nurs_routines.tests.fixtures.scrambler_fixtures import scrambling_data, \
-    scrambled_averages, scrambled_averages_id_id2, mixed_size_scramble_data
+    scrambled_averages, scrambled_averages_id_id2, mixed_size_scramble_data, \
+    mixed_size_scramble_data2
 
 
 def test_scramble(scrambling_data, scrambled_averages):
@@ -56,3 +57,8 @@ def test_mixed_size_scramble_retains_index_order(mixed_size_scramble_data):
 def test_mixed_size_scramble_check_data_removed(mixed_size_scramble_data):
     scrambled = scramble_to_file(mixed_size_scramble_data, ["A"], ["B", "C"], "temp")
     assert all(scrambled[scrambled["A"] == "C"]["B"].isna().values)
+
+
+def test_mixed_size_scramble_no_data_loss(mixed_size_scramble_data2):
+    scrambled = scramble_to_file(mixed_size_scramble_data2, ["A", "A2"], ["B", "C"], "temp")
+    assert scrambled.shape[0] == mixed_size_scramble_data2.shape[0]

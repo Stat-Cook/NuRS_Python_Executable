@@ -24,10 +24,12 @@ tasks = {
         left_on="Staff Number",
         right_on="Employee Number",
         left_date="Duty Date",
-        right_date="Date_stamp"
+        right_date="Date_stamp",
+        report_path="Trust_data/Temporary_Files/Shifts_Demographics_report.txt",
+        no_pid_report_path="Extract_data/Shifts_Demographics_report_short.txt"
     ),
     "Scramble as of": dict(
-        aggregate_columns=["Owning Unit", "Duty Date", "Shift"],
+        aggregate_columns=["Owning Unit", "Duty Date", "Shift Type"],
         file_path="Trust_data/Temporary_Files/Temporary_Shift_Demographics.csv"
     ),
     "Remove PID": {},
