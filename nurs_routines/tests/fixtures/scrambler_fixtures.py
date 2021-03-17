@@ -40,3 +40,15 @@ def mixed_size_scramble_data():
     ))
     frame["A2"] = frame["A"]
     return frame
+
+
+@pytest.fixture
+def mixed_size_scramble_data2():
+    frame = pd.DataFrame(dict(
+        A=2 * ["A"] + list("CDEF") + 2 * ["B"] + list("GHIJKL") + 3 * ["A"] + 3 * ["B"],
+        A2=list("ABCDEFGHIJKLMNOPQRST"),
+        B=4 * list(range(5)),
+        C=range(20),
+        D=range(20)
+    ))
+    return frame
