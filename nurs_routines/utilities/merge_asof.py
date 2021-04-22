@@ -14,13 +14,13 @@ pd.options.mode.chained_assignment = None
 
 class MergeAsOf:
     """
-    Aggregated-merge two datasets, based on the last relevant time in the reference set.
+    Aggregated-merge two data sets, based on the last relevant time in the reference set.
     Parameters
     ----------
-    data_path: str
-        path to core dataset with dates to match.
-    reference_path: str
-        path to lookup data set to match to.
+    ungrouped_data: str or pd.DataFrame
+        path to core data set or actual data set with dates to match.
+    ungrouped_reference: str
+        path to lookup data set or actual dat set to match to.
     left_group: str
         The group to aggregate 'data' on
     right_group: str
@@ -32,12 +32,21 @@ class MergeAsOf:
         If true log file contains list of all merge keys.
     """
     # pylint:disable=too-many-arguments
-    def __init__(self, data_path, reference_path, left_group, right_group,
+    def __init__(self, ungrouped_data, ungrouped_reference, left_group, right_group,
                  earliest_date=datetime(1970, 1, 1), log_merge=False):
-        self.data = GroupedFrame(data_path, left_group)
-        self.reference = GroupedFrame(reference_path, right_group)
+        if isinstance(ungrouped_data, str):
+            self.data = GroupedFrame(ungrouped_data, left_group)
+        else:
+            self.data = GroupedFrame.from_data(ungrouped_data, left_group)
+
+        if isinstance(ungrouped_reference, str):
+            self.reference = GroupedFrame(ungrouped_reference, right_group)
+        else:
+            self.reference = GroupedFrame.from_data(ungrouped_reference, right_group)
+
         self.earliest_date = earliest_date
         self.log_merge = log_merge
+
 
     def prepend_data(self, data, date_column):
         """
@@ -148,7 +157,9 @@ class MergeAsOf:
         with open(file, "w") as f:
             for i in self.overlap:
                 f.write(f"{i}:\n")
-                f.writelines("\n".join(self.overlap[i]))
+                str_map = map(str, self.overlap[i])
+                string = "\n".join(str_map)
+                f.write(string)
                 f.write("\n")
 
     def pid_less_report_to_file(self, file):
@@ -173,6 +184,7 @@ class MergeAsOf:
         no_pid_report_path: str
             File path to report the quantity of overlap to.
         """
+        # TODO: Understand why overlap_report_to_file threw error.
         if report_path:
             self.overlap_report_to_file(report_path)
 

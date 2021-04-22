@@ -26,7 +26,7 @@ def test_fnc_monthly(file_name_checker_monthly):
     Check FNC monthly makes the right number of file names
     """
     expected_names = file_name_checker_monthly.target
-    assert len(expected_names) == 60
+    assert len(expected_names) == 66
 
 
 def test_fnc_quarterly(file_name_checker_quarterly):
@@ -34,7 +34,7 @@ def test_fnc_quarterly(file_name_checker_quarterly):
     Check FNC quarterly makes the right number of file names
     """
     expected_names = file_name_checker_quarterly.target
-    assert len(expected_names) == 20
+    assert len(expected_names) == 22
 
 
 def test_fnc_full(file_name_checker_full):

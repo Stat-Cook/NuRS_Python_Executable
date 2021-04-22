@@ -1,48 +1,20 @@
-import pytest
 import pandas as pd
 
-from nurs_routines.utilities.merge_asof import MergeAsOf
+from nurs_routines.tests.fixtures.merge_asof_fixtures import test_data, \
+    test_data_extra_bodies, test_reference,  merged_data, merge_object, \
+    merged_data_extra_bodies, merged_object_extra_bodies
 
 
-@pytest.fixture
-def merge_object():
-    return MergeAsOf(
-        "nurs_routines/tests/test_data/merge_data.csv",
-        "nurs_routines/tests/test_data/merge_reference.csv",
-        "user", "user")
+def test_merge_n_cases(test_data, merged_data):
+    assert merged_data.shape[0] == test_data.shape[0]
 
 
-@pytest.fixture
-def merged_data(merge_object):
-    return merge_object.main("date", "date")
+def test_merge_k_features(test_data, merged_data):
+    assert merged_data.shape[1] != test_data.shape[1]
 
 
-@pytest.fixture
-def merged_object_extra_bodies():
-    return MergeAsOf(
-        "nurs_routines/tests/test_data/merge_data_extra_bodies.csv",
-        "nurs_routines/tests/test_data/merge_reference.csv",
-        "user", "user")
-
-
-@pytest.fixture
-def merged_data_extra_bodies(merged_object_extra_bodies):
-    return merged_object_extra_bodies.main("date", "date")
-
-
-def test_merge_n_cases(merged_data):
-    raw_data = pd.read_csv("nurs_routines/tests/test_data/merge_data.csv")
-    assert merged_data.shape[0] == raw_data.shape[0]
-
-
-def test_merge_k_features(merged_data):
-    raw_data = pd.read_csv("nurs_routines/tests/test_data/merge_data.csv")
-    assert merged_data.shape[1] != raw_data.shape[1]
-
-
-def test_merge_columns_kept(merged_data):
-    raw_data = pd.read_csv("nurs_routines/tests/test_data/merge_data.csv")
-    assert all(i in merged_data.columns for i in raw_data.columns)
+def test_merge_columns_kept(test_data, merged_data):
+    assert all(i in merged_data.columns for i in test_data.columns)
 
 
 def test_merge_last_values(merged_data):
@@ -77,3 +49,7 @@ def test_overlap(merge_object):
 
 def test_overlap_report(merged_object_extra_bodies):
     merged_object_extra_bodies.overlap_report_to_file("temp.txt")
+    with open("temp.txt", "r") as file:
+        string = file.read()
+    split_string = string.split("\n")
+    assert len(split_string) == 11
