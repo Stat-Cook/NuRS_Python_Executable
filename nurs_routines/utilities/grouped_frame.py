@@ -8,7 +8,6 @@ from .io import load_data
 
 
 class GroupedFrame:
-
     """
     A pandas grouped DataFrame loaded from file.
     Parameters
@@ -20,11 +19,26 @@ class GroupedFrame:
     """
 
     def __init__(self, file_path, group_by):
-        data = load_data(file_path)
-        self.path = file_path
+        self.path = None
+        self.data = None
+        self.columns = None
+        self.options = None
+
+        if file_path is not None:
+            data = load_data(file_path)
+            self.path = file_path
+            self.initialize_values(data, group_by)
+
+    @classmethod
+    def from_data(cls, data, group_by):
+        empty = cls(None, None)
+        empty.initialize_values(data, group_by)
+        return empty
+
+    def initialize_values(self, data, group_by):
         self.data = data.groupby(group_by)
         self.columns = data.columns
-        self.options = list(self.data.groups) #data[group_by].unique()
+        self.options = list(self.data.groups)  # data[group_by].unique()
 
     def __repr__(self):
         return "GroupedFrame(path={})".format(self.path)

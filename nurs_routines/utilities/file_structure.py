@@ -5,7 +5,7 @@ General utility objects for checking file names.
 import pandas as pd
 
 
-START = "2015-07"
+START = "2015-01"
 END = "2020-06"
 file_options = {
     "ESR_Leavers": {"name": "ESR_Leavers", "style": "Time series",
