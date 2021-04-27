@@ -33,16 +33,16 @@ class MergeAsOf:
     """
     # pylint:disable=too-many-arguments
     def __init__(self, ungrouped_data, ungrouped_reference, left_group, right_group,
-                 earliest_date=datetime(1970, 1, 1), log_merge=False):
+                 earliest_date=datetime(1970, 1, 1), log_merge=False, dtypes=None):
         if isinstance(ungrouped_data, str):
-            self.data = GroupedFrame(ungrouped_data, left_group)
+            self.data = GroupedFrame(ungrouped_data, left_group, dtypes=dtypes)
         else:
-            self.data = GroupedFrame.from_data(ungrouped_data, left_group)
+            self.data = GroupedFrame.from_data(ungrouped_data, left_group, dtypes=dtypes)
 
         if isinstance(ungrouped_reference, str):
-            self.reference = GroupedFrame(ungrouped_reference, right_group)
+            self.reference = GroupedFrame(ungrouped_reference, right_group, dtypes=dtypes)
         else:
-            self.reference = GroupedFrame.from_data(ungrouped_reference, right_group)
+            self.reference = GroupedFrame.from_data(ungrouped_reference, right_group, dtypes=dtypes)
 
         self.earliest_date = earliest_date
         self.log_merge = log_merge
