@@ -37,28 +37,26 @@ def test_split_apply_two_levels(split_apply_frm, split_apply_increment_frm):
 
 def test_cached_split_apply(split_apply_frm, split_apply_increment_frm):
     """Check cached split apply."""
-    result = cached_split_apply(split_apply_frm, "ID", split_function, "temp")
+    result = cached_split_apply(split_apply_frm, "ID", split_function, "split_apply_temp")
     assert (result == split_apply_increment_frm).values.all()
 
 
 def test_cached_split_apply_file_exists(split_apply_frm, split_apply_increment_frm):
     """Check cached split apply when file already exists"""
-    open("temp", "w")
-
-    result = cached_split_apply(split_apply_frm, "ID", split_function, "temp")
+    result = cached_split_apply(split_apply_frm, "ID", split_function, "split_apply_temp")
     assert (result == split_apply_increment_frm).values.all()
 
 
 def test_cached_split_apply_replicate(split_apply_frm, split_apply_increment_frm):
     """Check cached split apply with repeated use."""
-    cached_split_apply(split_apply_frm, "ID", split_function, "temp")
-    result = cached_split_apply(split_apply_frm, "ID", split_function, "temp")
+    cached_split_apply(split_apply_frm, "ID", split_function, "split_apply_temp")
+    result = cached_split_apply(split_apply_frm, "ID", split_function, "split_apply_temp")
     assert (result == split_apply_increment_frm).values.all()
 
 
 def test_cached_split_apply_removes_file(split_apply_frm, split_apply_increment_frm):
     """Check cached split apply cleans up temporary files."""
-    cached_split_apply(split_apply_frm, "ID", split_function, "temp")
+    cached_split_apply(split_apply_frm, "ID", split_function, "split_apply_temp")
     assert "temp" not in os.listdir()
 
 
