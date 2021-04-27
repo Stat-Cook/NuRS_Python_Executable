@@ -1,7 +1,8 @@
 import pandas as pd
+from nurs_routines.utilities.merge_asof import MergeAsOf
 
 from nurs_routines.tests.fixtures.merge_asof_fixtures import test_data, \
-    test_data_extra_bodies, test_reference,  merged_data, merge_object, \
+    test_data_extra_bodies, test_reference, merged_data, merge_object, \
     merged_data_extra_bodies, merged_object_extra_bodies
 
 
@@ -53,3 +54,31 @@ def test_overlap_report(merged_object_extra_bodies):
         string = file.read()
     split_string = string.split("\n")
     assert len(split_string) == 11
+
+
+def test_merge_mixed_dtype():
+    folder = "nurs_routines/tests/test_data/merge_mixed_dtype"
+    merger = MergeAsOf(
+        f"{folder}/Mixed_Shifts.csv", f"{folder}/Mixed_Demos.csv",
+        "Staff Number", "Employee Number",
+        dtypes={"Staff Number": str, "Employee Number": str}
+    )
+    merged_data = merger.main(
+        left_on="Duty Date",
+        right_on="Date_stamp"
+    )
+    assert not merged_data["Value2"].isna().all()
+
+
+def test_merge_mixed_dtype_fails():
+
+    folder = "nurs_routines/tests/test_data/merge_mixed_dtype"
+    merger = MergeAsOf(
+        f"{folder}/Mixed_Shifts.csv", f"{folder}/Mixed_Demos.csv",
+        "Staff Number", "Employee Number"
+    )
+    merged_data = merger.main(
+        left_on="Duty Date",
+        right_on="Date_stamp"
+    )
+    assert merged_data["Value2"].isna().all()
