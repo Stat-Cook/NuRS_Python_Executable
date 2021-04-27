@@ -26,16 +26,18 @@ tasks = {
         left_date="Duty Date",
         right_date="Date_stamp",
         report_path="Trust_data/Temporary_Files/Shifts_Demographics_report.txt",
-        no_pid_report_path="Extract_data/Shifts_Demographics_report_short.txt"
+        no_pid_report_path="Extract_data/Shifts_Demographics_report_short.txt",
+        dtypes={"Staff Number": str, "Employee Number": str}
     ),
     "Scramble as of": dict(
         aggregate_columns=["Owning Unit", "Duty Date", "Shift Type"],
         file_path="Trust_data/Temporary_Files/Temporary_Shift_Demographics.csv"
     ),
     "Remove PID": {},
-    "To file": dict(
+    "To file by year": dict(
         extract_path=EXTRACT_PATH,
-        file_name="Allocate_Shifts_Worked_Demographics_Combined"
+        date_column="Duty Date",
+        file_name_function=lambda x: f"Allocate_Shifts_Worked_Demographics_Combined_{x}"
     )
 }
 
