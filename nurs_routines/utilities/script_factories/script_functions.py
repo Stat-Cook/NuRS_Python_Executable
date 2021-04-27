@@ -97,7 +97,7 @@ class ScriptFunctionFactory:
 
     @staticmethod
     def merge_as_of(paths, left_on, right_on, left_date, right_date,
-                    report_path=None, no_pid_report_path=None):
+                    report_path=None, no_pid_report_path=None, dtypes=None):
         """
         Binding to nurs_routines.merge_asof.MergeAsOf.main routine.
         Allows for alignment of two data sets via the look back method.
@@ -124,7 +124,7 @@ class ScriptFunctionFactory:
         pandas.DataFrame
         """
         assert len(paths) == 2
-        merger = MergeAsOf(*paths, left_on, right_on)
+        merger = MergeAsOf(*paths, left_on, right_on, dtypes=dtypes)
         merged_data = merger.main(left_date, right_date,
                                   report_path=report_path,
                                   no_pid_report_path=no_pid_report_path)
@@ -267,6 +267,20 @@ class ScriptFunctionFactory:
         result = data.isna().mean()
         return result
 
+    @staticmethod
+    def to_file_by_year(data, date_column, extract_path, file_name_function, index=False):
+
+        data[date_column] = pd.to_datetime(data[date_column])
+        years = data[date_column].apply(lambda x: x.year)
+        year_groups = data.groupby(years)
+
+        for year, df in year_groups:
+            to_file(df, extract_path, file_name_function(year) + ".csv", index=index)
+            print("Complete - data written to {}".format(
+                os.path.join(extract_path, file_name_function(year) + ".csv")
+            ))
+
+
     @property
     def script_functions(self):
         """
@@ -292,5 +306,6 @@ class ScriptFunctionFactory:
             "Scramble in months": self.month_shuffler,
             "Remove PID": remove_pid,
             "To file": self.to_file_scripted,
-            "Is NA": self.is_na
+            "Is NA": self.is_na,
+            "To file by year": self.to_file_by_year
         }

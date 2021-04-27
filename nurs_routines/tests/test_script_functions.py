@@ -12,5 +12,5 @@ def sff():
 
 def test_sff_scramble_merge_as_of(sff, mixed_size_scramble_data):
     data = [mixed_size_scramble_data, ["B"]]
-    scrambled = sff.scramble_merge_as_of(data, ["A"], "temp")
+    scrambled = sff.scramble_merge_as_of(data, ["A"], "file_function_temp")
     assert scrambled.shape[0] == mixed_size_scramble_data.shape[0]

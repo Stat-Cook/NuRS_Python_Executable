@@ -18,20 +18,23 @@ class GroupedFrame:
         The column(s) to group on.
     """
 
-    def __init__(self, file_path, group_by):
+    def __init__(self, file_path, group_by, dtypes=None):
         self.path = None
         self.data = None
         self.columns = None
         self.options = None
 
         if file_path is not None:
-            data = load_data(file_path)
+            data = load_data(file_path, dtypes=dtypes)
             self.path = file_path
             self.initialize_values(data, group_by)
 
     @classmethod
-    def from_data(cls, data, group_by):
+    def from_data(cls, data, group_by, dtypes=None):
         empty = cls(None, None)
+        if dtypes:
+            data = data.astype(dtypes)
+
         empty.initialize_values(data, group_by)
         return empty
 

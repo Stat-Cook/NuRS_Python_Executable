@@ -36,7 +36,7 @@ def find_file(path, name):
     return [os.path.join(path, file) for file in files]
 
 
-def load_data(file_path):
+def load_data(file_path, dtypes=None):
     """
     Load data from a file_path. Adapts to deal with .csv or .xls(x)
     Parameters
@@ -47,9 +47,9 @@ def load_data(file_path):
     try:
         if ".xls" in file_path:
             # 'engine' unnecessary in later version of pandas:
-            return pd.read_excel(file_path, engine="openpyxl")
+            return pd.read_excel(file_path, engine="openpyxl", dtype=dtypes)
 
-        return pd.read_csv(file_path)
+        return pd.read_csv(file_path, dtype=dtypes)
     except pandas.errors.ParserError:
         raise TypeError(f"File at {file_path} could not be read.  "
                         f"Check file type and try again.")
