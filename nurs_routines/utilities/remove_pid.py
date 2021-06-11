@@ -21,7 +21,7 @@ def remove_pid(data, extra_remove=None):
     default_remove = [
         'Title', 'First Name', 'Middle Name', 'Last Name', 'Person',
         'Home Phone', 'Mobile Phone', "Supervisor",
-        'NI Number', 'Assignment Number', 'Employee Number', 'Staff Number',
+        'NI Number', 'Assignment Number', 'Assignment No', 'Employee Number', 'Staff Number',
         'Personal Email Address', 'Email Address',
         'Address Line 1', 'Address Line 2', 'Address Line 3',
         'Town or City', 'County', 'Postal Code', "Census Entered By"
