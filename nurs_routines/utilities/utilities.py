@@ -17,8 +17,6 @@ def shuffle(frm, name=None):
     ----------
     frm: pandas.DataFrame
         the data set to shuffle
-    size_check: bool
-        Boolean flag - if true check there is enough data for shuffle to work
     name: str
         a name that represents the data set
 
