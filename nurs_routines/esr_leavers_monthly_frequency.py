@@ -27,11 +27,11 @@ def monthly_frequency(data):
     -------
     pandas.DataFrame
     """
-    grps = data.groupby([ALLOCATE_WARD_COLUMN, "Termination Month", "Leaving Reason"])
+    grps = data.groupby([ALLOCATE_WARD_COLUMN, "Termination Month", "Leaving Reason", "Staff Group"])
     result = pd.DataFrame(
         [np.concatenate((i, j.shape))[:-1] for i, j in grps]
     )
-    result.columns = ["Organisation", "Termination Month", "Leaving Reason", "Count"]
+    result.columns = ["Organisation", "Termination Month", "Leaving Reason", "Staff Group", "Count"]
     return result
 
 
